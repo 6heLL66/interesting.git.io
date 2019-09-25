@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<style>
+	*{
+		margin:5;
+	}
+	body{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.field{
+		width: 100%;
+		height: 700px;
+		border:2px solid black;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.element{
+		width: 40px;
+		height: 30px;
+		background: red;
+		position: relative;
+		font-size: 28px;
+		color: white;
+		text-align: center;
+		line-height: 30px;
+		
+
+	}
+	.control{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		align-items: center;
+		width: 40%;
+		height: 100px;
+		border:2px solid black;
+		margin-top: 50PX;
+	}
+	.button{
+		width: 20%;
+		background-color:black;
+		color: white;
+		font-size: 24px;
+		text-align: center;
+		cursor: pointer;
+
+	}
+</style>
+<body>
+	<div class="field">
+		<div class="element">&#9827;</div>
+	</div>
+	<div class="control">
+		<div class="button" id="left">Влево</div>
+		<div class="button" id="right">Вправо</div>
+		<div class="button" id="top">Вверх</div>
+		<div class="button" id="bottom">Вниз</div>
+	</div>
+
+	<script>
+		let i = 0;
+		let a = 0;
+		let b = 0;
+		let c = 0;
+		function topper(){
+			 i = i + 1;
+			$('.element').css('bottom',i + "px");
+			if (i == 335){
+				clearInterval(topp);
+			};	
+		}
+		function botter(){
+			 i = i - 1;
+			$('.element').css('bottom',i + "px");
+			if (i == -335){
+				clearInterval(bott);
+			};	
+		}
+		function lefter(){
+			 b = b - 1;
+			$('.element').css('left',b + "px");
+			if (b == -790){
+				clearInterval(leftt);
+			};	
+		}
+		function righter(){
+			 b = b + 1;
+			$('.element').css('left',b + "px");
+			if (b == 790){
+				clearInterval(rightyt);
+			};	
+		}
+
+
+
+
+		$('#top').on('mousedown',function(){
+			if ($('.element').offset().top > 20)
+			topp =  setInterval(topper , 5);
+		
+		});
+		$('#top').on('mouseup',function(){
+			clearInterval(topp);
+		});
+
+
+		$('#bottom').on('mousedown',function(){
+			if ($('.element').offset().top < 680)
+			bott =  setInterval(botter , 5);
+		});
+		$('#bottom').on('mouseup',function(){
+			clearInterval(bott);
+		});
+
+
+		$('#left').on('mousedown',function(){
+			if ($('.element').offset().left > 20)
+			leftt =  setInterval(lefter , 5);
+		});
+		$('#left').on('mouseup',function(){
+			clearInterval(leftt);
+		});
+
+
+		$('#right').on('mousedown',function(){
+			if ($('.element').offset().left < 1600)
+			rightyt =  setInterval(righter ,5);
+		});
+		$('#right').on('mouseup',function(){
+			clearInterval(rightyt);
+		});
+	
+
+	</script>
+</body>
+</html>
