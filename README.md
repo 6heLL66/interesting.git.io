@@ -1,1 +1,1 @@
-https://6hell66.github.io/interesting.github.io/
+https://6hell66.github.io/interesting.git.io/
