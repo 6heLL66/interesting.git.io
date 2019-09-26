@@ -42,7 +42,7 @@
 		width: 40%;
 		height: 100px;
 		border:2px solid black;
-		margin-top: 50PX;
+		margin-top: 10PX;
 	}
 	.button{
 		width: 20%;
@@ -56,7 +56,7 @@
 	.data{
 		display: flex;
 		width: 20%;
-		height: 100px;
+		height:80px;
 		justify-content: space-between;
 		align-items: center;
 		font-size: 42px;
@@ -80,11 +80,45 @@
 		left: 20px;
 		top: 20px;
 	}
+	.text{
+		color: red;
+		font-size: 80px;
+		font-family: Arial;
+	}
+	.win{
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		background: rgba(0,0,0,0.85);
+		display: none;
+	}
+	.restart{
+		border:2px solid white;
+		padding: 5px 30px 5px 30px;
+		font-size: 22px;
+		cursor: pointer;
+		margin-top: 20px;
+		color: red;
+
+	}
+	.restart:hover{
+		background: white;
+	}
+	a{
+		text-decoration: none;
+	}
 
 </style>
 <body>
 	<span class="infotop g"></span>
 	<span class="infoleft g" style="top: 50px;"></span>
+	<span class="width" style="top: 200px;"></span>
 	
 	<div class="data">
 		<div class="number">
@@ -106,12 +140,17 @@
 		<div class="button" id="top">Вверх</div>
 		<div class="button" id="bottom">Вниз</div>
 	</div>
-
+	<div class="win">
+		<div class="text"></div>
+		<a href="rofl.html"><div class="restart">Restart</div></a>
+	</div>
 	<script>
+		let w = $('.field').outerWidth() - 20;
 		let i = 0;
 		let a = 0;
 		let b = 0;
 		let c = 0;
+		
 		function topper(){
 			 i = i + 1;
 			$('.element').css('bottom',i + "px");
@@ -173,7 +212,7 @@
 
 
 		$('#right').on('mousedown',function(){
-			if ($('.element').offset().left < 1580)
+			if ($('.element').offset().left < w)
 			rightyt =  setInterval(righter ,5);
 		});
 		$('#right').on('mouseup',function(){
@@ -193,16 +232,16 @@
 		
 
 
-		let x1 =	Math.floor(Math.random() * (1500 - 10) + 10);
+		let x1 =	Math.floor(Math.random() * (w - 10) + 10);
 		let y1 =	Math.floor(Math.random() * (600 - 110) + 110);
 
-		let x2 =	Math.floor(Math.random() * (1500 - 10) + 10);
+		let x2 =	Math.floor(Math.random() * (w - 10) + 10);
 		let y2 =	Math.floor(Math.random() * (600 - 110) + 100);
 
-		let x3 =	Math.floor(Math.random() * (1500 - 10) + 10);
+		let x3 =	Math.floor(Math.random() * (w - 10) + 10);
 		let y3 =	Math.floor(Math.random() * (600 - 110) + 110);
 
-		let x4 =	Math.floor(Math.random() * (1500 - 10) + 10);
+		let x4 =	Math.floor(Math.random() * (w - 10) + 10);
 		let y4 =	Math.floor(Math.random() * (600 - 110) + 110);
 
 		$('#c1').css('top',y1);
@@ -231,6 +270,8 @@ setInterval(infoc1,500);
 		$('.time').text('0:' + t);
 		if (t == 0){
 			clearInterval(timeset);
+			time = true;
+
 		}
 		};
 
@@ -266,6 +307,19 @@ setInterval(infoc1,500);
 		};
 		setInterval(check,5);
 		});
+		function checkWin() {
+			if ($('.coins').text() == '4' && $('.time').text() == '0:0'){
+				$('.win').css('display','flex');
+				$('.text').css('color','green');
+				$('.text').text('CONGRATULATIONS');		
+		}
+		if ($('.coins').text() != '4' && $('.time').text() == '0:0'){
+			$('.win').css('display','flex');
+				$('.text').css('color','red');
+				$('.text').text('GAME OVER');
+		};
+		};
+		setInterval(checkWin,10);
 	</script>
 </body>
 </html>
