@@ -137,7 +137,7 @@
 	<div class="control">
 		<div class="button" id="left">Влево</div>
 		<div class="button" id="right">Вправо</div>
-		<div class="button" id="top">Вверх</div>
+		<div class="button" id="top" >Вверх</div>
 		<div class="button" id="bottom">Вниз</div>
 	</div>
 	<div class="win">
@@ -180,11 +180,13 @@
 			};	
 		}
 
+	
+	
 
 
-
+		
 		$('#top').on('mousedown',function(){
-			if ($('.element').offset().top > 20)
+			if ($('.element').offset().top > 100)
 			topp =  setInterval(topper , 5);
 		
 		});
