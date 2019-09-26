@@ -24,12 +24,11 @@
 		align-items: center;
 	}
 	.element{
-		width: 40px;
-		height: 30px;
-		background: red;
+		width: 20px;
+		height: 20px;
 		position: relative;
 		font-size: 28px;
-		color: white;
+		color: black;
 		text-align: center;
 		line-height: 30px;
 		
@@ -54,9 +53,51 @@
 		cursor: pointer;
 
 	}
+	.data{
+		display: flex;
+		width: 20%;
+		height: 100px;
+		justify-content: space-between;
+		align-items: center;
+		font-size: 42px;
+		font-family: Arial;
+	}
+	.number{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items:center;
+	}
+	.q{
+		display: flex;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	.g{
+		position: fixed;
+		font-size: 35px;
+		left: 20px;
+		top: 20px;
+	}
+
 </style>
 <body>
+	<span class="infotop g"></span>
+	<span class="infoleft g" style="top: 50px;"></span>
+	
+	<div class="data">
+		<div class="number">
+			<span class="coins">0</span>
+			<img src="coin.jpg" width="50px" height="50px" style="margin-left: 10px;">
+		</div>
+		<div class="time"></div>
+	</div>
 	<div class="field">
+		<img src="coin.jpg" id="c1" class="q" width="20px" height="20px">
+		<img src="coin.jpg" id="c2" class="q" width="20px" height="20px">
+		<img src="coin.jpg" id="c3" class="q" width="20px" height="20px">
+		<img src="coin.jpg" id="c4" class="q" width="20px" height="20px">
 		<div class="element">&#9827;</div>
 	</div>
 	<div class="control">
@@ -138,8 +179,93 @@
 		$('#right').on('mouseup',function(){
 			clearInterval(rightyt);
 		});
+
+		function infoElement() {
+			$('.infotop').text($('.element').offset().top);
+			$('.infoleft').text($('.element').offset().left);
+		}
+		setInterval(infoElement,1);
 	
 
+
+
+		$(document ).ready(function(){
+		
+
+
+		let x1 =	Math.floor(Math.random() * (1500 - 10) + 10);
+		let y1 =	Math.floor(Math.random() * (600 - 110) + 110);
+
+		let x2 =	Math.floor(Math.random() * (1500 - 10) + 10);
+		let y2 =	Math.floor(Math.random() * (600 - 110) + 100);
+
+		let x3 =	Math.floor(Math.random() * (1500 - 10) + 10);
+		let y3 =	Math.floor(Math.random() * (600 - 110) + 110);
+
+		let x4 =	Math.floor(Math.random() * (1500 - 10) + 10);
+		let y4 =	Math.floor(Math.random() * (600 - 110) + 110);
+
+		$('#c1').css('top',y1);
+		$('#c1').css('left',x1);
+
+		$('#c2').css('top',y2);
+		$('#c2').css('left',x2);
+		
+		$('#c3').css('top',y3);
+		$('#c3').css('left',x3);
+		
+		$('#c4').css('top',y4);
+		$('#c4').css('left',x4);
+
+
+function infoc1() {
+			$('.infoc1top').text($('#c1').offset().top);
+			$('.infoc1left').text($('#c1').offset().left);
+		};
+setInterval(infoc1,500);
+
+		let t = 30;
+		$('.time').text('0:' + t);
+		function timer(){
+		t = t-1;
+		$('.time').text('0:' + t);
+		if (t == 0){
+			clearInterval(timeset);
+		}
+		};
+
+		timeset = setInterval(timer,1000);
+
+		coins = 0;
+		
+
+		function check(){
+
+		if($('#c1').css ('display') == 'flex' &&  Math.abs($('#c1').offset().top - $('.element').offset().top) < 10 && Math.abs($('#c1').offset().left - $('.element').offset().left) < 10){
+			$('#c1').css ('display','none');
+			coins++;
+		};
+
+		if($('#c2').css ('display') == 'flex' &&  Math.abs($('#c2').offset().top - $('.element').offset().top) < 10 && Math.abs($('#c2').offset().left - $('.element').offset().left) < 10){
+			$('#c2').css ('display','none');
+			coins++;
+		};
+
+		if($('#c3').css ('display') == 'flex' &&  Math.abs($('#c3').offset().top - $('.element').offset().top) < 10 && Math.abs($('#c3').offset().left - $('.element').offset().left) < 10){
+			$('#c3').css ('display','none');
+			coins++;
+		};
+
+		if($('#c4').css ('display') == 'flex' &&  Math.abs($('#c4').offset().top - $('.element').offset().top) < 10 && Math.abs($('#c4').offset().left - $('.element').offset().left) < 10){
+			$('#c4').css ('display','none');
+			coins++;
+
+			
+		};
+		$('.coins').text(coins);
+		};
+		setInterval(check,5);
+		});
 	</script>
 </body>
 </html>
