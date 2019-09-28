@@ -40,7 +40,7 @@
 		justify-content: space-around;
 		align-items: center;
 		width: 40%;
-		height: 100px;
+		height: 50px;
 		border:2px solid black;
 		margin-top: 10PX;
 	}
@@ -150,10 +150,12 @@
 		let a = 0;
 		let b = 0;
 		let c = 0;
+		let gh = false;
 		
 		function topper(){
 			 i = i + 1;
 			$('.element').css('bottom',i + "px");
+			gh = true;
 			if (i == 335){
 				clearInterval(topp);
 			};	
@@ -161,6 +163,7 @@
 		function botter(){
 			 i = i - 1;
 			$('.element').css('bottom',i + "px");
+			gh = true;
 			if (i == -335){
 				clearInterval(bott);
 			};	
@@ -168,6 +171,7 @@
 		function lefter(){
 			 b = b - 1;
 			$('.element').css('left',b + "px");
+			gh = true;
 			if (b == -790){
 				clearInterval(leftt);
 			};	
@@ -175,16 +179,129 @@
 		function righter(){
 			 b = b + 1;
 			$('.element').css('left',b + "px");
+			gh = true;
 			if (b == 790){
 				clearInterval(rightyt);
 			};	
 		}
 
 	
-	
+		$(document).on('keydown',function (e) {
+			let keyid;
+			if (e.which){
+				keyid = e.which;
+				
+			};
+			 if (keyid == 38 && gh == false){
+			 	topp =  setInterval(topper , 5);
+			 	$('#top').css('background','red');
+			};
+			
+		
+			 });
 
+
+		$(document).on('keyup',function (e) {
+			let keyid;
+			if (e.which){
+				keyid = e.which;
+				
+			};
+			 if (keyid == 38){
+			 	clearInterval(topp);
+			 	$('#top').css('background','black');
+			 	gh = false;
+			};
+		});
+
+		$(document).on('keydown',function (e) {
+			let keyid;
+			if (e.which){
+				keyid = e.which;
+				
+			};
+			 if (keyid == 40 && gh == false){
+			 	bott =  setInterval(botter , 5);
+			 	$('#bottom').css('background','red');
+			};
+			
+		
+			 });
+
+
+		$(document).on('keyup',function (e) {
+			let keyid;
+			if (e.which){
+				keyid = e.which;
+				
+			};
+			 if (keyid == 40){
+			 	clearInterval(bott);
+			 	$('#bottom').css('background','black');
+			 	gh = false;
+			};
+		});
+
+		$(document).on('keydown',function (e) {
+			let keyid;
+			if (e.which){
+				keyid = e.which;
+				
+			};
+			 if (keyid == 37 && gh == false){
+			 	leftt =  setInterval(lefter , 5);
+			 	$('#left').css('background','red');
+			};
+			
+		
+			 });
+
+
+		$(document).on('keyup',function (e) {
+			let keyid;
+			if (e.which){
+				keyid = e.which;
+				
+			};
+			 if (keyid == 37){
+			 	clearInterval(leftt);
+			 	$('#left').css('background','black');
+			 	gh = false;
+			};
+		});
+
+		$(document).on('keydown',function (e) {
+			let keyid;
+			if (e.which){
+				keyid = e.which;
+				
+			};
+			 if (keyid == 39 && gh == false){
+			 	rightt =  setInterval(righter , 5);
+			 	$('#right').css('background','red');
+			};
+			
+		
+			 });
+
+
+		$(document).on('keyup',function (e) {
+			let keyid;
+			if (e.which){
+				keyid = e.which;
+				
+			};
+			 if (keyid == 39){
+			 	clearInterval(rightt);
+			 	$('#right').css('background','black');
+			 	gh = false;
+			};
+		});
 
 		
+
+
+		/*
 		$('#top').on('mousedown',function(){
 			if ($('.element').offset().top > 100)
 			topp =  setInterval(topper , 5);
@@ -220,7 +337,7 @@
 		$('#right').on('mouseup',function(){
 			clearInterval(rightyt);
 		});
-
+		*/
 		function infoElement() {
 			$('.infotop').text($('.element').offset().top);
 			$('.infoleft').text($('.element').offset().left);
