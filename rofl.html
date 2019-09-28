@@ -192,7 +192,7 @@
 				keyid = e.which;
 				
 			};
-			 if (keyid == 38 && gh == false){
+			 if (keyid == 38 && gh == false && $('.element').offset().top > 100){
 			 	topp =  setInterval(topper , 5);
 			 	$('#top').css('background','red');
 			};
@@ -220,7 +220,7 @@
 				keyid = e.which;
 				
 			};
-			 if (keyid == 40 && gh == false){
+			 if (keyid == 40 && gh == false && $('.element').offset().top < 680){
 			 	bott =  setInterval(botter , 5);
 			 	$('#bottom').css('background','red');
 			};
@@ -248,7 +248,7 @@
 				keyid = e.which;
 				
 			};
-			 if (keyid == 37 && gh == false){
+			 if (keyid == 37 && gh == false && $('.element').offset().left > 100){
 			 	leftt =  setInterval(lefter , 5);
 			 	$('#left').css('background','red');
 			};
@@ -276,7 +276,7 @@
 				keyid = e.which;
 				
 			};
-			 if (keyid == 39 && gh == false){
+			 if (keyid == 39 && gh == false && $('.element').offset().left < 1580){
 			 	rightt =  setInterval(righter , 5);
 			 	$('#right').css('background','red');
 			};
