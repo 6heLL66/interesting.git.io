@@ -116,6 +116,7 @@
 
 </style>
 <body>
+	<span style="font-size: 28px;">Перемещаться на WASD</span>
 	<span class="infotop g"></span>
 	<span class="infoleft g" style="top: 50px;"></span>
 	<span class="width" style="top: 200px;"></span>
@@ -192,7 +193,7 @@
 				keyid = e.which;
 				
 			};
-			 if (keyid == 38 && gh == false && $('.element').offset().top > 100){
+			 if (keyid == 87 && gh == false && $('.element').offset().top > 100){
 			 	topp =  setInterval(topper , 5);
 			 	$('#top').css('background','red');
 			};
@@ -207,7 +208,7 @@
 				keyid = e.which;
 				
 			};
-			 if (keyid == 38){
+			 if (keyid == 87){
 			 	clearInterval(topp);
 			 	$('#top').css('background','black');
 			 	gh = false;
@@ -220,7 +221,7 @@
 				keyid = e.which;
 				
 			};
-			 if (keyid == 40 && gh == false && $('.element').offset().top < 680){
+			 if (keyid == 83 && gh == false && $('.element').offset().top < 680){
 			 	bott =  setInterval(botter , 5);
 			 	$('#bottom').css('background','red');
 			};
@@ -235,7 +236,7 @@
 				keyid = e.which;
 				
 			};
-			 if (keyid == 40){
+			 if (keyid == 83){
 			 	clearInterval(bott);
 			 	$('#bottom').css('background','black');
 			 	gh = false;
@@ -248,7 +249,7 @@
 				keyid = e.which;
 				
 			};
-			 if (keyid == 37 && gh == false && $('.element').offset().left > 100){
+			 if (keyid == 65 && gh == false && $('.element').offset().left > 100){
 			 	leftt =  setInterval(lefter , 5);
 			 	$('#left').css('background','red');
 			};
@@ -263,7 +264,7 @@
 				keyid = e.which;
 				
 			};
-			 if (keyid == 37){
+			 if (keyid == 65){
 			 	clearInterval(leftt);
 			 	$('#left').css('background','black');
 			 	gh = false;
@@ -276,7 +277,7 @@
 				keyid = e.which;
 				
 			};
-			 if (keyid == 39 && gh == false && $('.element').offset().left < 1580){
+			 if (keyid == 68 && gh == false && $('.element').offset().left < 1580){
 			 	rightt =  setInterval(righter , 5);
 			 	$('#right').css('background','red');
 			};
@@ -291,7 +292,7 @@
 				keyid = e.which;
 				
 			};
-			 if (keyid == 39){
+			 if (keyid == 68){
 			 	clearInterval(rightt);
 			 	$('#right').css('background','black');
 			 	gh = false;
@@ -401,22 +402,22 @@ setInterval(infoc1,500);
 
 		function check(){
 
-		if($('#c1').css ('display') == 'flex' &&  Math.abs($('#c1').offset().top - $('.element').offset().top) < 10 && Math.abs($('#c1').offset().left - $('.element').offset().left) < 10){
+		if($('#c1').css ('display') == 'flex' &&  Math.abs($('#c1').offset().top - $('.element').offset().top) < 15 && Math.abs($('#c1').offset().left - $('.element').offset().left) < 15){
 			$('#c1').css ('display','none');
 			coins++;
 		};
 
-		if($('#c2').css ('display') == 'flex' &&  Math.abs($('#c2').offset().top - $('.element').offset().top) < 10 && Math.abs($('#c2').offset().left - $('.element').offset().left) < 10){
+		if($('#c2').css ('display') == 'flex' &&  Math.abs($('#c2').offset().top - $('.element').offset().top) < 15 && Math.abs($('#c2').offset().left - $('.element').offset().left) < 15){
 			$('#c2').css ('display','none');
 			coins++;
 		};
 
-		if($('#c3').css ('display') == 'flex' &&  Math.abs($('#c3').offset().top - $('.element').offset().top) < 10 && Math.abs($('#c3').offset().left - $('.element').offset().left) < 10){
+		if($('#c3').css ('display') == 'flex' &&  Math.abs($('#c3').offset().top - $('.element').offset().top) < 15 && Math.abs($('#c3').offset().left - $('.element').offset().left) < 15){
 			$('#c3').css ('display','none');
 			coins++;
 		};
 
-		if($('#c4').css ('display') == 'flex' &&  Math.abs($('#c4').offset().top - $('.element').offset().top) < 10 && Math.abs($('#c4').offset().left - $('.element').offset().left) < 10){
+		if($('#c4').css ('display') == 'flex' &&  Math.abs($('#c4').offset().top - $('.element').offset().top) < 15 && Math.abs($('#c4').offset().left - $('.element').offset().left) < 15){
 			$('#c4').css ('display','none');
 			coins++;
 
