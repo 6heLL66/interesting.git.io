@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Board</title>
+	
+	<style >
+		*{
+			margin: 0;
+		}
+		.desk{
+			width: 50%;	
+			margin-left: 25%;
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: flex-start;
+			border:2px solid black;
+			
+
+		}
+		.place_b{
+			width: 12.5%;
+			height: auto;
+			background-color: black;
+		}
+		.place_w{
+			width: 12.5%;
+			height: auto;
+			background-color: white;
+		}
+		
+	</style>
+</head>
+<body>
+	<div class="desk" id="deskk">
+		
+	</div>
+
+	<script>
+
+		window.onload = function(){
+			let desk = document.getElementById('deskk');
+			heightt = desk.clientWidth + 'px';
+			desk.style.height = heightt ;
+			
+			
+			
+
+			for (let i = 0;i<8;i++){
+				for(let k = 0;k<8;k++){
+					if((k+2)%2 == 0 && (i+2)%2 == 1){
+						desk.insertAdjacentHTML('beforeend','<div class=place_w></div>');
+				    };
+					if((k+2)%2 == 1 && (i+2)%2 == 1){
+						desk.insertAdjacentHTML('beforeend','<div class=place_b></div>');
+					};
+					if((k+2)%2 == 0 && (i+2)%2 == 0){
+						desk.insertAdjacentHTML('beforeend','<div class=place_b></div>');
+				    };
+					if((k+2)%2 == 1 && (i+2)%2 == 0){
+						desk.insertAdjacentHTML('beforeend','<div class=place_w></div>');
+					};
+				};
+			};
+		};
+	</script>
+</body>
+</html>
