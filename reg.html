@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <title>херь какаято</title>
+    <link rel="stylesheet" href="regstyle.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1,  shrink-to-fit=no">
+
+  </head>
+<body>
+  <div class="border1">
+
+  </div>
+  <div class="fo">
+    <div class="">
+      <ul id="cou">
+        <li> <a href="#" style="padding-bottom:20px;" id="b1">Sign Up</a> </li>
+        <li> <a href="#" style="padding-bottom:20px;" id="b2">Sign In</a> </li>
+      </ul>
+    </div>
+    <div id="animate">
+      <div class="form1">
+        <form class="" action="index.html" method="post" onsubmit="valid(this)">
+          <label for="name" style="color:#cbcdd6; font-size:25px;">Имя:</label><br><br>
+          <input type="text" name="name" placeholder="" id="name"><br><br>
+          <!-- <label for="name" style="color:#cbcdd6; font-size:25px;">Email:</label><br><br> -->
+          <!-- <input type="text" name="email" placeholder="" id="email"><br><br> -->
+          <label for="password" style="color:#cbcdd6; font-size:25px;">Пароль:</label><br><br>
+          <input type="password" name="password" placeholder="" id="password"><br><br>
+          <label for="repassword" style="color:#cbcdd6; font-size:25px;">Проверка Пароля:</label><br><br>
+          <input type="repassword" name="repassword" placeholder="" id="repassword"><br><br>
+          <input type="submit" name="submit" value="Готово" style="border-radius: 20px;  border: none;  width: 400px;height: 40px; background-color:#225df6; color:#fff; font-size:20px; margin-top:30px;">
+        </form>
+      </div>
+      <div class="form2">
+        <form class="" action="index.html" method="post" onsubmit="valid(this)">
+          <label for="name" style="color:#cbcdd6; font-size:25px;">Имя:</label><br><br>
+          <input type="text" name="name" placeholder="" id="name"><br><br>
+          <!-- <label for="name" style="color:#cbcdd6; font-size:25px;">Email:</label><br><br> -->
+          <!-- <input type="text" name="email" placeholder="" id="email"><br><br> -->
+          <label for="password" style="color:#cbcdd6; font-size:25px;">Пароль:</label><br><br>
+          <input type="password" name="password" placeholder="" id="password"><br><br>
+
+          <input type="submit" name="submit" value="Готово" style="border-radius: 20px;  border: none;  width: 400px;height: 40px; background-color:#225df6; color:#fff; font-size:20px; margin-top:30px;">
+        </form>
+      </div>
+    </div>
+
+  </div>
+  <div class="border2">
+
+  </div>
+  <script src="http://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    function valid (form) {
+     var fail = false;
+     var name = form.name.value;
+     var password = form.password.value;
+     var RePassword = form.RePassword.value;
+     var email = form.email.value;
+
+     var abr_pattern= /[a-z0-9!#$%&'*+/=?^`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^`{|}~-]+)@(?:[a-z0-9](?:[a-z0-9-][a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+
+     if (name == "" || name == " ")
+       fail = "Вы не ввели свое имя";
+     else if(abr_pattern.test(email)==false)
+       fail = "вы ввели email неправильно";
+     else if (password == "")
+       fail = "Вы не ввели пароль";
+     else if (password != RePassword)
+     fail = "Пароли не совпадают";
+
+
+     if (fail)
+       alert(fail);
+     else
+       window.location = index.html;
+     }
+
+
+     $('#b1').click(function(){
+       event.preventDefault(),
+       $('#b1').css({
+         'color':'#fff',
+         'border-bottom':' 2px solid #225df6'
+         }),
+       $('#b2').css({
+         'color':'#888da2',
+         'border-bottom':'none'
+       });
+     });
+     $('#b2').click(function(){
+       event.preventDefault(),
+       $('#b2').css({
+         'color':'#fff',
+         'border-bottom':' 2px solid #225df6'
+       }),
+       $('#b1').css({
+         'color':'#888da2',
+         'border-bottom':'none'
+       });
+     });
+     var count;
+     count=1;
+     $('#cou').click(function(){
+       count=count+1;
+       $('#animate').css({
+
+       })
+       if(count%2!=0){
+         $('#animate').animate({left:'+=500px'},500)
+         $('.fo').animate({height:'650px'},500)
+         $('#animate').css({
+
+         })
+       } else{
+         $('#animate').animate({left:'-=500px'},500)
+         $('.fo').animate({height:'500px'},500)
+         $('#animate').css({
+           })
+       };
+     });
+  </script>
+</body>
