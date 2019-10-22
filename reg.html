@@ -102,24 +102,25 @@
        });
      });
      var count;
-     count=1;
-     $('#cou').click(function(){
-       count=count+1;
-       $('#animate').css({
-
-       })
-       if(count%2!=0){
-         $('#animate').animate({left:'+=500px'},500)
+     count=0;
+     $('#b1').click(function(){
+     if(count == 1) {
+      $('#animate').animate({left:'+=500px'},500)
          $('.fo').animate({height:'650px'},500)
-         $('#animate').css({
-
-         })
-       } else{
-         $('#animate').animate({left:'-=500px'},500)
-         $('.fo').animate({height:'500px'},500)
-         $('#animate').css({
-           })
-       };
-     });
+         count--;        
+     }
+     });      
+         
+         
+     
+      $('#b2').click(function(){
+        if(count == 0){
+      $('#animate').animate({left:'-=500px'},500)
+      $('.fo').animate({height:'500px'},500)
+      count++;
+     }
+     
+       });
+    
   </script>
 </body>
