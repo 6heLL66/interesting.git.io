@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Graph</title>
+</head>
+<body style="display: flex;flex-direction:column;align-items: center;">
+	<canvas width="500px" height="500px" id="can"></canvas>
+	<input type="text" id="in">
+	<input type="submit" id="btn">
+	<script>
+		var canvas = document.getElementById("can"), 
+	        ctx = canvas.getContext("2d");
+		ctx.moveTo(0,250);
+	    ctx.lineTo(500,250);
+	    ctx.moveTo(250,0);
+	    ctx.lineTo(250,500);
+	    ctx.strokeStyle = "black";
+	    ctx.stroke();
+		var btn = document.getElementById('btn');
+		btn.onclick = function(){
+			function drawGraph(f){
+				
+	            
+	            
+				var formula = f.split('=')[1];
+				formula = formula.split('');
+				for(let i = 0;i<formula.length;i++){
+					if(formula[i] == '+')formula[i] = '-';
+					else if(formula[i] == '-')formula[i] = '+';
+					
+				}				
+				formula = formula.join('');
+
+				for(let x = -250;x<250;x++){
+
+					var y = eval(formula);
+					var x1 = x + 250;
+					var y1 = y + 250;
+					
+					
+					console.log(x,y);
+					if(x == -250){
+						ctx.moveTo(x1,y1);
+						continue;
+					}
+					
+					ctx.lineTo(x1,y1);
+					
+					ctx.strokeStyle = "red";
+	            	ctx.stroke();
+			}
+		}
+		var t = document.getElementById('in').value;
+		drawGraph(t);
+		};
+		
+	</script>
+</body>
+</html>
