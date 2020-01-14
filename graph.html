@@ -6,6 +6,7 @@
 </head>
 <body style="display: flex;flex-direction:column;align-items: center;">
 	<canvas width="1000px" height="1000px" id="can"></canvas>
+	<button onClick = "clean ()" style="width: 100px;height:50px;position: fixed;top: 0;left:0;">Clear</button>
 	<input type="text" id="in">
 	<input type="submit" id="btn">
 	<script>
@@ -19,12 +20,12 @@
 	    ctx.lineTo(500,1000);
 	    ctx.stroke();
 	    ctx.closePath();
-	    ctx.strokeStyle = "red";
+	   
 		var btn = document.getElementById('btn');
 		btn.onclick = function(){
 			function drawGraph(f){
 				
-	            
+	             ctx.strokeStyle = "red";
 	            
 				var formula = f.split('=')[1];
 				formula = formula.split('');
@@ -53,11 +54,23 @@
 	            	
 				}
 				ctx.stroke();
+				ctx.closePath();
 		}
 		var t = document.getElementById('in').value;
 		drawGraph(t);
 		};
-		
+		function clean(){
+			console.log('cleaned');
+			canvas.width = canvas.width;
+			ctx.strokeStyle = "black";
+	    	ctx.beginPath();
+			ctx.moveTo(0,500);
+		    ctx.lineTo(1000,500);
+		    ctx.moveTo(500,0);
+		    ctx.lineTo(500,1000);
+		    ctx.stroke();
+		    ctx.closePath();
+		}
 	</script>
 </body>
 </html>
