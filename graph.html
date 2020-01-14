@@ -5,18 +5,21 @@
 	<title>Graph</title>
 </head>
 <body style="display: flex;flex-direction:column;align-items: center;">
-	<canvas width="500px" height="500px" id="can"></canvas>
+	<canvas width="1000px" height="1000px" id="can"></canvas>
 	<input type="text" id="in">
 	<input type="submit" id="btn">
 	<script>
 		var canvas = document.getElementById("can"), 
 	        ctx = canvas.getContext("2d");
-		ctx.moveTo(0,250);
-	    ctx.lineTo(500,250);
-	    ctx.moveTo(250,0);
-	    ctx.lineTo(250,500);
 	    ctx.strokeStyle = "black";
+	    ctx.beginPath();
+		ctx.moveTo(0,500);
+	    ctx.lineTo(1000,500);
+	    ctx.moveTo(500,0);
+	    ctx.lineTo(500,1000);
 	    ctx.stroke();
+	    ctx.closePath();
+	    ctx.strokeStyle = "red";
 		var btn = document.getElementById('btn');
 		btn.onclick = function(){
 			function drawGraph(f){
@@ -31,25 +34,25 @@
 					
 				}				
 				formula = formula.join('');
-
-				for(let x = -250;x<250;x++){
+				ctx.beginPath();
+				for(let x = -500;x<500;x++){
 
 					var y = eval(formula);
-					var x1 = x + 250;
-					var y1 = y + 250;
+					var x1 = x + 500;
+					var y1 = -y + 500;
 					
 					
 					console.log(x,y);
-					if(x == -250){
+					if(x == -500){
 						ctx.moveTo(x1,y1);
 						continue;
 					}
 					
-					ctx.lineTo(x1,y1);
-					
-					ctx.strokeStyle = "red";
-	            	ctx.stroke();
-			}
+					ctx.lineTo(x1,y1);					
+	            	
+	            	
+				}
+				ctx.stroke();
 		}
 		var t = document.getElementById('in').value;
 		drawGraph(t);
