@@ -26,7 +26,9 @@
 					"speedY" : Math.sin(ang)*vel,
 					"speedX" : Math.cos(ang)*vel,
 					"posX" : posX,
-					"posY" : posY
+					"posY" : posY,
+					"lifeTime" : Math.round(Math.random() * (4000 - 1500) - 1500),
+					"time" : 0
 				}
 				console.log(obj.color);
 				pixels.push(obj);
@@ -42,6 +44,8 @@
 				
 				pixels[i].posY = pixels[i].posY + pixels[i].speedY;
 				pixels[i].posX = pixels[i].posX + pixels[i].speedX;
+				pixels[i].time += 20;
+				if(pixels[i].time > pixels[i].lifeTime)pixels[i].color[3] = 0;
 				
 			
 			}
@@ -69,7 +73,7 @@
 		canvas.onclick = function(e){
 			var posY = e.clientY,
 				posX = e.clientX;
-			for(let i =0;i<500;i++){
+			for(let i =0;i<1500;i++){
 				rgba = [Math.round(Math.random()*255),Math.round(Math.random() * 255),Math.round(Math.random()*255),Math.round(Math.random() * 255 )];
 			setPixels(posX,posY,rgba);
 			
