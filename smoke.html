@@ -3,17 +3,77 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Smoke</title>
+  	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
-<body>
-	<canvas  style="margin:0;" id="root" width="800px" height="800px"></canvas>
+<body style="display: flex;flex-direction: row">
+	<div id = "canvas" style="width: 50%;height : 90vh;margin:0">
+		<canvas  style="margin:0;" id="root" ></canvas>
+	</div>
+	<div class="range" style="width: 50%;height:90vh;display: flex;flex-direction: column;align-items: center;justify-content: space-between;margin:0">
+		<!-- 1 -->
+		<div>
+			<label for = "speedY">SpeedY : </label>
+			<input type="text" id="speedY" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</div>
+		<div id="slider-range1" style="width:30%"></div>
+
+		<!-- 2 -->
+		<div>
+			<label for = "speedX">SpeedX : </label>
+			<input type="text" id="speedX" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</div>
+		<div id="slider-range2" style="width:30%"></div>
+
+		<!-- 3 -->
+		<div>
+			<label for = "lifetime">LifeTime : </label>
+			<input type="text" id="lifetime" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</div>
+		<div id="slider-range3" style="width:30%"></div>
+
+		<!-- 4 -->
+		<div>
+			<label for = "red">Red : </label>
+			<input type="text" id="red" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</div>
+		<div id="slider-range4" style="width:30%"></div>
+
+		<!-- 5 -->
+		<div>
+			<label for = "green">Green : </label>
+			<input type="text" id="green" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</div>
+		<div id="slider-range5" style="width:30%"></div>
+
+		<!-- 6 -->
+		<div>
+			<label for = "blue">Blue : </label>
+			<input type="text" id="blue" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</div>
+		<div id="slider-range6" style="width:30%"></div>
+
+		<!-- 7 -->
+		<div>
+			<label for = "a">A : </label>
+			<input type="text" id="a" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</div>
+		<div id="slider-range7" style="width:30%"></div>
+
+	</div>
+	
 
 	<script type="text/javascript">
 		var canvas = document.getElementById('root'),
-			ctx = canvas.getContext("2d"),
-			myImageData = ctx.createImageData(800, 800);
+			ctx = canvas.getContext("2d");
+			
 
+		canvas.width = document.getElementById('canvas').offsetWidth;
+		canvas.height = document.getElementById('canvas').offsetHeight;
 		
- 		var pixels = [];
+ 		var pixels = [],
+ 			myImageData = ctx.createImageData(canvas.width, canvas.height);
 
 		function setPixels(posX,posY,min,max,n){
 			for(let i = 0;i<n;i++){
@@ -60,7 +120,7 @@
 		}
 		function drawPixels(){
 			canvas.width = canvas.width;
-			myImageData = ctx.createImageData(800, 800);
+			myImageData = ctx.createImageData(canvas.width, canvas.height);
 
 			for(let i = 0;i<pixels.length;i++){
 				if(pixels[i].alive == false)continue;
@@ -78,10 +138,10 @@
 			ctx.putImageData(myImageData, 0, 0);
 		}
 		up = setInterval(updatePixels,20);
-		canvas.onclick = function(e){
+		canvas.onmousedown = function(e){
 			var posY = e.clientY,
 				posX = e.clientX,
-				n = 200,
+				n = 20,
 				min = {
 					"r" : 0,
 					"g" : 0,
@@ -95,18 +155,19 @@
 					"b" : 255,
 					"a" : 255,
 					"lifetime" : 2500
-				}
-			
-				
-			setPixels(posX,posY,min,max,n);
-			
-			
+				}			
+			 canvas.onmousemove = function(e){
+			 	posY = e.clientY;
+				posX = e.clientX;
+			 }
+			 px = setInterval(function(){
+				setPixels(posX,posY,min,max,n);	
+			},20);		
 			drawPixels();
-			
-			
-			
-			
-			
+						
+		}
+		canvas.onmouseup = function(){
+			clearInterval(px);
 		}
 		function clearPixels () {
 			canvas.width = canvas.width;
@@ -115,6 +176,138 @@
 			clearInterval(up);
 		}
 		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//1
+
+$( function() {
+    $( "#slider-range1" ).slider({
+      range: true,
+      min: -5,
+      max:0.1,
+      step : 0.1,
+      values: [ -5, 0.1 ],
+      slide: function( event, ui ) {
+        $( "#speedY" ).val( "" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+      }
+    });
+    $( "#speedY" ).val( "" + $( "#slider-range1" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range1" ).slider( "values", 1 ) );
+  } );
+
+//2
+
+$( function() {
+    $( "#slider-range2" ).slider({
+      range: true,
+      min: -10,
+      max:0,
+      step : 0.1,
+      values: [ -10, 0 ],
+      slide: function( event, ui ) {
+        $( "#speedX" ).val( "" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+      }
+    });
+    $( "#speedX" ).val( "" + $( "#slider-range2" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range2" ).slider( "values", 1 ) );
+  } );
+
+//3
+
+$( function() {
+    $( "#slider-range3" ).slider({
+      range: true,
+      min: 1500,
+      max:4000,
+      step : 10,
+      values: [ 1500, 4000 ],
+      slide: function( event, ui ) {
+        $( "#lifetime" ).val( "" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+      }
+    });
+    $( "#lifetime" ).val( "" + $( "#slider-range3" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range3" ).slider( "values", 1 ) );
+  } );
+
+//4
+
+$( function() {
+    $( "#slider-range4" ).slider({
+      range: true,
+      min: 0,
+      max:255,
+      step : 1,
+      values: [ 0,255 ],
+      slide: function( event, ui ) {
+        $( "#red" ).val( "" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+      }
+    });
+    $( "#red" ).val( "" + $( "#slider-range4" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range4" ).slider( "values", 1 ) );
+  } );
+
+//5
+
+$( function() {
+    $( "#slider-range5" ).slider({
+      range: true,
+      min: 0,
+      max:255,
+      step : 1,
+      values: [ 0, 255 ],
+      slide: function( event, ui ) {
+        $( "#green" ).val( "" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+      }
+    });
+    $( "#green" ).val( "" + $( "#slider-range5" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range5" ).slider( "values", 1 ) );
+  } );
+
+//6
+
+$( function() {
+    $( "#slider-range6" ).slider({
+      range: true,
+      min: 0,
+      max:255,
+      step : 1,
+      values: [ 0, 255 ],
+      slide: function( event, ui ) {
+        $( "#blue" ).val( "" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+      }
+    });
+    $( "#blue" ).val( "" + $( "#slider-range6" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range6" ).slider( "values", 1 ) );
+  } );
+
+//7
+
+$( function() {
+    $( "#slider-range7" ).slider({
+      range: true,
+      min: 0,
+      max:255,
+      step : 1,
+      values: [ 0, 255 ],
+      slide: function( event, ui ) {
+        $( "#a" ).val( "" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+      }
+    });
+    $( "#a" ).val( "" + $( "#slider-range7" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range7" ).slider( "values", 1 ) );
+  } );
 	</script>
 </body>
 </html>
