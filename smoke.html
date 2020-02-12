@@ -15,10 +15,11 @@
 		
  		var pixels = [];
 
-		function setPixels(posX,posY,rgba){
-			
-				var vel =  Math.random() * (0 - -4) + -4,
-					ang = Math.random() * (3 - 1) + 1;
+		function setPixels(posX,posY,min,max,n){
+			for(let i = 0;i<n;i++){
+				var vel =  Math.random() * (0.1 - -2) + -2,
+					ang = Math.random() * (-5.2 - -4.2) + -4.2,
+					rgba = [Math.round(Math.random() * (max.r - min.r) + min.r),Math.round(Math.random() * (max.g - min.g) + min.g),Math.round(Math.random() * (max.b - min.b) + min.b),Math.round(Math.random() * (max.a - min.a) + min.a)];
 					
 				
 				var obj = {
@@ -27,12 +28,14 @@
 					"speedX" : Math.cos(ang)*vel,
 					"posX" : posX,
 					"posY" : posY,
-					"lifeTime" : Math.round(Math.random() * (3000 - 1500) - 1500),
-					"time" : 0
+					"lifeTime" : Math.round(Math.random() * (max.lifetime - min.lifetime) + min.lifetime),
+					"time" : 0,
+					"alive" : true
 				}
-				console.log(obj.color);
+				
 				pixels.push(obj);
-				//console.log(pixels);
+				
+			}
 				
 			
 			
@@ -41,11 +44,14 @@
 		function updatePixels(){
 			
 			for(let i = 0;i<pixels.length;i++){
+				if(pixels[i].alive == true){
+					if(pixels[i].time > pixels[i].lifeTime)pixels[i].alive = false;
+					pixels[i].posY = pixels[i].posY + pixels[i].speedY;
+					pixels[i].posX = pixels[i].posX + pixels[i].speedX;
+					pixels[i].time += 20;
+				}
+
 				
-				pixels[i].posY = pixels[i].posY + pixels[i].speedY;
-				pixels[i].posX = pixels[i].posX + pixels[i].speedX;
-				pixels[i].time += 20;
-				if(pixels[i].time > pixels[i].lifeTime)pixels[i].color[3] = 0;
 				
 			
 			}
@@ -57,6 +63,7 @@
 			myImageData = ctx.createImageData(800, 800);
 
 			for(let i = 0;i<pixels.length;i++){
+				if(pixels[i].alive == false)continue;
 				let color = pixels[i].color;
 				    
 				let x = Math.round(pixels[i].posX),
@@ -70,17 +77,33 @@
 			
 			ctx.putImageData(myImageData, 0, 0);
 		}
+		up = setInterval(updatePixels,20);
 		canvas.onclick = function(e){
 			var posY = e.clientY,
-				posX = e.clientX;
-			for(let i =0;i<300;i++){
-				rgba = [Math.round(Math.random()*255),Math.round(Math.random() * 255),Math.round(Math.random()*255),Math.round(Math.random() * 255 )];
-			setPixels(posX,posY,rgba);
+				posX = e.clientX,
+				n = 200,
+				min = {
+					"r" : 0,
+					"g" : 0,
+					"b" : 0,
+					"a" : 0,
+					"lifetime" : 1500
+				},
+				max = {
+					"r" : 255,
+					"g" : 255,
+					"b" : 255,
+					"a" : 255,
+					"lifetime" : 2500
+				}
 			
-			}
+				
+			setPixels(posX,posY,min,max,n);
+			
+			
 			drawPixels();
-			up = setInterval(updatePixels,20);
-			setTimeout(clearPixels,3000);
+			
+			
 			
 			
 			
