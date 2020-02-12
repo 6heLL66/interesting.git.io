@@ -17,8 +17,8 @@
 
 		function setPixels(posX,posY,rgba){
 			
-				var vel =  Math.random() * (0 - -2) + -2,
-					ang = Math.random() * (2 - 1) + 1;
+				var vel =  Math.random() * (0 - -4) + -4,
+					ang = Math.random() * (3 - 1) + 1;
 					
 				
 				var obj = {
@@ -73,7 +73,7 @@
 		canvas.onclick = function(e){
 			var posY = e.clientY,
 				posX = e.clientX;
-			for(let i =0;i<200;i++){
+			for(let i =0;i<300;i++){
 				rgba = [Math.round(Math.random()*255),Math.round(Math.random() * 255),Math.round(Math.random()*255),Math.round(Math.random() * 255 )];
 			setPixels(posX,posY,rgba);
 			
