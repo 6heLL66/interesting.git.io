@@ -17,7 +17,7 @@
 
 		function setPixels(posX,posY,rgba){
 			
-				var vel =  Math.random() * (0 - -4) + -4,
+				var vel =  Math.random() * (0 - -2) + -2,
 					ang = Math.random() * (2 - 1) + 1;
 					
 				
@@ -27,7 +27,7 @@
 					"speedX" : Math.cos(ang)*vel,
 					"posX" : posX,
 					"posY" : posY,
-					"lifeTime" : Math.round(Math.random() * (4000 - 2500) - 2500),
+					"lifeTime" : Math.round(Math.random() * (3000 - 1500) - 2500),
 					"time" : 0
 				}
 				console.log(obj.color);
@@ -73,14 +73,14 @@
 		canvas.onclick = function(e){
 			var posY = e.clientY,
 				posX = e.clientX;
-			for(let i =0;i<400;i++){
+			for(let i =0;i<200;i++){
 				rgba = [Math.round(Math.random()*255),Math.round(Math.random() * 255),Math.round(Math.random()*255),Math.round(Math.random() * 255 )];
 			setPixels(posX,posY,rgba);
 			
 			}
 			drawPixels();
 			up = setInterval(updatePixels,20);
-			setTimeout(clearPixels,4000);
+			setTimeout(clearPixels,3000);
 			
 			
 			
