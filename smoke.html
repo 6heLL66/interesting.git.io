@@ -26,14 +26,14 @@
 
 		<!-- 1 -->
 		<div>
-			<label for = "speedY">SpeedY : </label>
+			<label for = "speedY">Velocity : </label>
 			<input type="text" id="speedY" readonly style="border:0; color:#f6931f; font-weight:bold;">
 		</div>
 		<div id="slider-range1" style="width:30%"></div>
 
 		<!-- 2 -->
 		<div>
-			<label for = "speedX">SpeedX : </label>
+			<label for = "speedX">Angle ° : </label>
 			<input type="text" id="speedX" readonly style="border:0; color:#f6931f; font-weight:bold;">
 		</div>
 		<div id="slider-range2" style="width:30%"></div>
@@ -193,7 +193,7 @@
 					"a" : Number(document.getElementById('a').value.split(' - ')[0]),
 					"lifetime" :Number(document.getElementById('lifetime').value.split(' - ')[0]),
 					"vel" : Number(document.getElementById('speedY').value.split(' - ')[0]),
-					"ang" : Number(document.getElementById('speedX').value.split(' - ')[0])
+					"ang" : Number(document.getElementById('speedX').value.split(' - ')[0])*Math.PI/180
 				},
 				max = {
 					"r" : Number(document.getElementById('red').value.split(' - ')[1]),
@@ -202,7 +202,7 @@
 					"a" : Number(document.getElementById('a').value.split(' - ')[1]),
 					"lifetime" : Number(document.getElementById('lifetime').value.split(' - ')[1]),
 					"vel" : Number(document.getElementById('speedY').value.split(' - ')[1]),
-					"ang" : Number(document.getElementById('speedX').value.split(' - ')[1])
+					"ang" : Number(document.getElementById('speedX').value.split(' - ')[1])*Math.PI/180
 				};	
 			//console.log(max,min)	;	
 			 canvas.onmousemove = function(e){
@@ -245,7 +245,7 @@
 						"a" : Number(document.getElementById('a').value.split(' - ')[0]),
 						"lifetime" :Number(document.getElementById('lifetime').value.split(' - ')[0]),
 						"vel" : Number(document.getElementById('speedY').value.split(' - ')[0]),
-						"ang" : Number(document.getElementById('speedX').value.split(' - ')[0])
+						"ang" : Number(document.getElementById('speedX').value.split(' - ')[0])*Math.PI/180
 						},
 					max = {
 						"r" : Number(document.getElementById('red').value.split(' - ')[1]),
@@ -254,7 +254,7 @@
 						"a" : Number(document.getElementById('a').value.split(' - ')[1]),
 						"lifetime" : Number(document.getElementById('lifetime').value.split(' - ')[1]),
 						"vel" : Number(document.getElementById('speedY').value.split(' - ')[1]),
-						"ang" : Number(document.getElementById('speedX').value.split(' - ')[1])
+						"ang" : Number(document.getElementById('speedX').value.split(' - ')[1])*Math.PI/180
 					},
 					posX = canvas.width/2,
 					posY = canvas.height/2;
@@ -321,10 +321,10 @@ $( function() {
 $( function() {
     $( "#slider-range2" ).slider({
       range: true,
-      min: -10,
-      max:10,
+      min: 0,
+      max: 360,
       step : 0.1,
-      values: [ -5.2, -4.2 ],
+      values: [ 45, 105 ],
       slide: function( event, ui ) {
         $( "#speedX" ).val( "" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
       }
