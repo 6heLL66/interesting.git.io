@@ -12,6 +12,15 @@
 		<canvas  style="margin:0;" id="root" ></canvas>
 	</div>
 	<div class="range" style="width: 50%;height:90vh;display: flex;flex-direction: column;align-items: center;justify-content: space-between;margin:0">
+
+		<!-- 0 -->
+		<div>
+			<label for = "n">Amount : </label>
+			<input type="text" id="n" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</div>
+		<div id="slider-range0" style="width:30%"></div>
+
+
 		<!-- 1 -->
 		<div>
 			<label for = "speedY">SpeedY : </label>
@@ -77,8 +86,8 @@
 
 		function setPixels(posX,posY,min,max,n){
 			for(let i = 0;i<n;i++){
-				var vel =  Math.random() * (0.1 - -2) + -2,
-					ang = Math.random() * (-5.2 - -4.2) + -4.2,
+				var vel =  Math.random() * (max.vel - min.vel) + min.vel,
+					ang = Math.random() * (max.ang - min.ang) + min.ang,
 					rgba = [Math.round(Math.random() * (max.r - min.r) + min.r),Math.round(Math.random() * (max.g - min.g) + min.g),Math.round(Math.random() * (max.b - min.b) + min.b),Math.round(Math.random() * (max.a - min.a) + min.a)];
 					
 				
@@ -141,21 +150,26 @@
 		canvas.onmousedown = function(e){
 			var posY = e.clientY,
 				posX = e.clientX,
-				n = 20,
+				n = Number(document.getElementById('n').value),
 				min = {
-					"r" : 0,
-					"g" : 0,
-					"b" : 0,
-					"a" : 0,
-					"lifetime" : 1500
+					"r" : Number(document.getElementById('red').value.split(' - ')[0]),
+					"g" : Number(document.getElementById('green').value.split(' - ')[0]),
+					"b" : Number(document.getElementById('blue').value.split(' - ')[0]),
+					"a" : Number(document.getElementById('a').value.split(' - ')[0]),
+					"lifetime" :Number(document.getElementById('lifetime').value.split(' - ')[0]),
+					"vel" : Number(document.getElementById('speedY').value.split(' - ')[0]),
+					"ang" : Number(document.getElementById('speedX').value.split(' - ')[0])
 				},
 				max = {
-					"r" : 255,
-					"g" : 255,
-					"b" : 255,
-					"a" : 255,
-					"lifetime" : 2500
-				}			
+					"r" : Number(document.getElementById('red').value.split(' - ')[1]),
+					"g" : Number(document.getElementById('green').value.split(' - ')[1]),
+					"b" : Number(document.getElementById('blue').value.split(' - ')[1]),
+					"a" : Number(document.getElementById('a').value.split(' - ')[1]),
+					"lifetime" : Number(document.getElementById('lifetime').value.split(' - ')[1]),
+					"vel" : Number(document.getElementById('speedY').value.split(' - ')[1]),
+					"ang" : Number(document.getElementById('speedX').value.split(' - ')[1])
+				};	
+			console.log(max,min)	;	
 			 canvas.onmousemove = function(e){
 			 	posY = e.clientY;
 				posX = e.clientX;
@@ -182,10 +196,20 @@
 
 
 
+//0
 
-
-
-
+$( function() {
+    $( "#slider-range0" ).slider({
+      min: 1,
+      max:500,
+      step : 5,
+      values: [ 30],
+      slide: function( event, ui ) {
+        $( "#n" ).val( + ui.values[ 0 ] );
+      }
+    });
+    $( "#n" ).val( "" + $( "#slider-range0" ).slider( "values", 0 ) );
+  } );
 
 
 
@@ -196,9 +220,9 @@ $( function() {
     $( "#slider-range1" ).slider({
       range: true,
       min: -5,
-      max:0.1,
+      max:5,
       step : 0.1,
-      values: [ -5, 0.1 ],
+      values: [ -2, 0.1 ],
       slide: function( event, ui ) {
         $( "#speedY" ).val( "" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
       }
@@ -213,9 +237,9 @@ $( function() {
     $( "#slider-range2" ).slider({
       range: true,
       min: -10,
-      max:0,
+      max:10,
       step : 0.1,
-      values: [ -10, 0 ],
+      values: [ -5.2, -4.2 ],
       slide: function( event, ui ) {
         $( "#speedX" ).val( "" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
       }
@@ -229,10 +253,10 @@ $( function() {
 $( function() {
     $( "#slider-range3" ).slider({
       range: true,
-      min: 1500,
-      max:4000,
+      min: 500,
+      max: 4000,
       step : 10,
-      values: [ 1500, 4000 ],
+      values: [ 1500, 3000 ],
       slide: function( event, ui ) {
         $( "#lifetime" ).val( "" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
       }
