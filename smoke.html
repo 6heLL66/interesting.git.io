@@ -12,7 +12,10 @@
 		<canvas  style="margin:0;" id="root" ></canvas>
 	</div>
 	<div class="range" style="width: 50%;height:90vh;display: flex;flex-direction: column;align-items: center;justify-content: space-between;margin:0">
-
+		<div>
+			<label for = "check">Постоянный источник в центре : </label>
+			<input type="checkbox" id="check" >
+		</div>
 		<!-- 0 -->
 		<div>
 			<label for = "n">Amount : </label>
@@ -80,17 +83,38 @@
 
 		canvas.width = document.getElementById('canvas').offsetWidth;
 		canvas.height = document.getElementById('canvas').offsetHeight;
-		
- 		var pixels = [],
- 			myImageData = ctx.createImageData(canvas.width, canvas.height);
+		var h = 0;
+		var pixels = [];
+		 var die = {
+					"color" : 0,
+					"speedY" : 0,
+					"speedX" : 0,
+					"posX" : 0,
+					"posY" : 0,
+					"lifeTime" :0,
+					"time" : 0,
+					"alive" : false
+			};
+		for(let i = 0;i<1000000;i++){
+			
+			pixels.push(die) ;
+		}
+		//console.log(pixels);
+ 		var myImageData = ctx.createImageData(canvas.width, canvas.height);
 
 		function setPixels(posX,posY,min,max,n){
-			for(let i = 0;i<n;i++){
+			var c = 0;
+			for(let i = 0;i<pixels.length;i++){
+				
+				if(c>=n){
+					h += c;
+					//console.log(1);
+					break;			
+				}
 				var vel =  Math.random() * (max.vel - min.vel) + min.vel,
 					ang = Math.random() * (max.ang - min.ang) + min.ang,
 					rgba = [Math.round(Math.random() * (max.r - min.r) + min.r),Math.round(Math.random() * (max.g - min.g) + min.g),Math.round(Math.random() * (max.b - min.b) + min.b),Math.round(Math.random() * (max.a - min.a) + min.a)];
-					
-				
+
 				var obj = {
 					"color" : rgba,
 					"speedY" : Math.sin(ang)*vel,
@@ -101,8 +125,19 @@
 					"time" : 0,
 					"alive" : true
 				}
+
+
+				if(pixels[i].alive == false){
+					//console.log(c);
+					c++;
+					pixels[i] = obj;
+					
+					//console.log(pixels);
+				}	
 				
-				pixels.push(obj);
+				
+				
+				//pixels.push(obj);
 				
 			}
 				
@@ -112,7 +147,7 @@
 		}
 		function updatePixels(){
 			
-			for(let i = 0;i<pixels.length;i++){
+			for(let i = 0;i<h;i++){
 				if(pixels[i].alive == true){
 					if(pixels[i].time > pixels[i].lifeTime)pixels[i].alive = false;
 					pixels[i].posY = pixels[i].posY + pixels[i].speedY;
@@ -131,7 +166,7 @@
 			canvas.width = canvas.width;
 			myImageData = ctx.createImageData(canvas.width, canvas.height);
 
-			for(let i = 0;i<pixels.length;i++){
+			for(let i = 0;i<h;i++){
 				if(pixels[i].alive == false)continue;
 				let color = pixels[i].color;
 				    
@@ -169,7 +204,7 @@
 					"vel" : Number(document.getElementById('speedY').value.split(' - ')[1]),
 					"ang" : Number(document.getElementById('speedX').value.split(' - ')[1])
 				};	
-			console.log(max,min)	;	
+			//console.log(max,min)	;	
 			 canvas.onmousemove = function(e){
 			 	posY = e.clientY;
 				posX = e.clientX;
@@ -183,13 +218,63 @@
 		canvas.onmouseup = function(){
 			clearInterval(px);
 		}
-		function clearPixels () {
-			canvas.width = canvas.width;
-			myImageData = ctx.createImageData(800, 800);
-			pixels = [];
-			clearInterval(up);
+		setInterval(unset,8000);
+		function unset () {
+			h -=4000;
 		}
 		
+
+		document.getElementById('check').onclick = function(e){
+			
+				posX = canvas.width/2,
+				posY = canvas.height/2;
+
+
+
+			
+
+			
+			if(e.target.checked){
+				
+				pxS = setInterval(function(){
+					var	n = Number(document.getElementById('n').value),
+					min = {
+						"r" : Number(document.getElementById('red').value.split(' - ')[0]),
+						"g" : Number(document.getElementById('green').value.split(' - ')[0]),
+						"b" : Number(document.getElementById('blue').value.split(' - ')[0]),
+						"a" : Number(document.getElementById('a').value.split(' - ')[0]),
+						"lifetime" :Number(document.getElementById('lifetime').value.split(' - ')[0]),
+						"vel" : Number(document.getElementById('speedY').value.split(' - ')[0]),
+						"ang" : Number(document.getElementById('speedX').value.split(' - ')[0])
+						},
+					max = {
+						"r" : Number(document.getElementById('red').value.split(' - ')[1]),
+						"g" : Number(document.getElementById('green').value.split(' - ')[1]),
+						"b" : Number(document.getElementById('blue').value.split(' - ')[1]),
+						"a" : Number(document.getElementById('a').value.split(' - ')[1]),
+						"lifetime" : Number(document.getElementById('lifetime').value.split(' - ')[1]),
+						"vel" : Number(document.getElementById('speedY').value.split(' - ')[1]),
+						"ang" : Number(document.getElementById('speedX').value.split(' - ')[1])
+					},
+					posX = canvas.width/2,
+					posY = canvas.height/2;
+					setPixels(posX,posY,min,max,n);	
+				},20);
+			}
+			else{
+				clearInterval(pxS);
+				
+			}
+		}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -201,7 +286,7 @@
 $( function() {
     $( "#slider-range0" ).slider({
       min: 1,
-      max:500,
+      max:200,
       step : 5,
       values: [ 30],
       slide: function( event, ui ) {
@@ -254,7 +339,7 @@ $( function() {
     $( "#slider-range3" ).slider({
       range: true,
       min: 500,
-      max: 4000,
+      max: 8000,
       step : 10,
       values: [ 1500, 3000 ],
       slide: function( event, ui ) {
