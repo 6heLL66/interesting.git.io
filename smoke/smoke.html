@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Smoke</title>
+  	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body style="display: flex;flex-direction: row">
+	
+	<div id = "canvas" style="width: 50%;height : 90vh;margin:0">
+		<canvas  style="margin:0;" id="root" ></canvas>
+	</div>
+	<div class="range" style="width: 50%;height:90vh;display: flex;flex-direction: column;align-items: center;justify-content: space-between;margin:0">
+		<div style="width: 60%;display: flex;flex-direction: row;font-size: 22px;" id="ch">
+			<div class="pixels" id="1" style="width: 50%;height:30px;background: red;border:2px solid red;color: white;text-align: center;line-height: 30px;cursor: pointer">Pixels</div>
+			<div  id = "2" class="smoke" style="width: 50%;height:30px;background: white;border:2px solid red;color: red;text-align: center;line-height: 30px;cursor: pointer">Smoke</div>
+		</div>
+		<div>
+			<label for = "check">Постоянный источник в центре : </label>
+			<input type="checkbox" id="check" >
+		</div>
+		<!-- 0 -->
+		<div>
+			<label for = "n">Amount : </label>
+			<input type="text" id="n" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</div>
+		<div id="slider-range0" style="width:30%"></div>
+
+
+		<!-- 1 -->
+		<div>
+			<label for = "speedY">Velocity : </label>
+			<input type="text" id="speedY" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</div>
+		<div id="slider-range1" style="width:30%"></div>
+
+		<!-- 2 -->
+		<div>
+			<label for = "speedX">Angle ° : </label>
+			<input type="text" id="speedX" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</div>
+		<div id="slider-range2" style="width:30%"></div>
+
+		<!-- 3 -->
+		<div>
+			<label for = "lifetime">LifeTime : </label>
+			<input type="text" id="lifetime" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</div>
+		<div id="slider-range3" style="width:30%"></div>
+
+		<!-- 4 -->
+		<div>
+			<label for = "red">Red : </label>
+			<input type="text" id="red" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</div>
+		<div id="slider-range4" style="width:30%"></div>
+
+		<!-- 5 -->
+		<div>
+			<label for = "green">Green : </label>
+			<input type="text" id="green" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</div>
+		<div id="slider-range5" style="width:30%"></div>
+
+		<!-- 6 -->
+		<div>
+			<label for = "blue">Blue : </label>
+			<input type="text" id="blue" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</div>
+		<div id="slider-range6" style="width:30%"></div>
+
+		<!-- 7 -->
+		<div>
+			<label for = "a">A : </label>
+			<input type="text" id="a" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</div>
+		<div id="slider-range7" style="width:30%"></div>
+
+	</div>
+	<img src="../images/smoke.png"  id="img" style="position: fixed">
+
+
+	<script src="main.js"></script>
+</body>
+</html>
