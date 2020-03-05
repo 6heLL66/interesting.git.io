@@ -6,26 +6,15 @@ var pixels = [];
 var myImageData = ctx.createImageData(canvas.width, canvas.height);
 var canvasTest = document.getElementById('canvaTest');
 var ctxTest = canvasTest.getContext("2d");
-var c = 0;
+c = 0;
 var animated = false;
-
-
 
 document.getElementById('btn').onclick = function(){
 	if(animated)return 0;
 	c++;
-	if(c>1){
-		for(let i = 0;i<pixels.length;i++){
-			let x = Math.round(Math.random()*canvas.width);
-			let y =  Math.round(Math.random()*canvas.height);
-			pixels[i].to[0] = x;
-			pixels[i].to[1] = y;
-			pixels[i].speed[0] = (x - pixels[i].pos[0]);
-			pixels[i].speed[1] = (y - pixels[i].pos[1]);
-			var time = 0;
-			up = setInterval(update,20);
-			return 0;
-		}
+	if(c%2 == 0){
+		destroy();
+		return 0;
 	}
 	ctxTest.fillStyle = "#000";
 	ctxTest.font = "100pt Arial";
@@ -45,17 +34,54 @@ document.getElementById('btn').onclick = function(){
 			to.push([x,y]);
 		}
 	}
-	setPixels(to.length);
-	drawPixels();
+	
+	
+		setPixels(to.length);
+		drawPixels();
+	
 	var up = setInterval(update,20);
+	setTimeout(function(){
+		clearInterval(up);
+		animated = false;
+		canvasTest.width = canvasTest.width;
+	},3000);
 
 	function setPixels(n){
+		if(pixels.length > 10){
+			if(pixels.length < n){
+				for(let i = pixels.length;i<to.length;i++){
+					var posX = Math.round(Math.random()*(canvas.width));
+					var posY = Math.round(Math.random()*(canvas.height));
+					var speed = [];
+					speed[0] = (to[i][0] - posX)/3;
+					speed[1] = (to[i][1] - posY)/3;
+					var obj = {
+						"color" : [0,0,0,255],
+						"pos" : [posX,posY],
+						"to" : [to[i][0],to[i][1]],
+						"speed" : speed
+					}
+					pixels.push(obj);
+				}
+			}
+			if(n < pixels.length){
+				for(i = pixels.length;i>=to.length;i--){
+					pixels.pop();
+				}
+			}
+			for(let i = 0;i<pixels.length;i++){
+				pixels[i].to = [to[i][0],to[i][1]];
+				pixels[i].speed = [(to[i][0] - pixels[i].pos[0])/3,(to[i][1] - pixels[i].pos[1])/3];
+			}
+
+			return 0;
+		}
 		for(let i = 0;i<n;i++){
 			var posX = Math.round(Math.random()*(canvas.width));
 			var posY = Math.round(Math.random()*(canvas.height));
 			var speed = [];
-			speed[0] = (to[i][0] - posX)/5;
-			speed[1] = (to[i][1] - posY)/5;
+			speed[0] = (to[i][0] - posX)/3;
+			speed[1] = (to[i][1] - posY)/3;
 			var obj = {
 				"color" : [0,0,0,255],
 				"pos" : [posX,posY],
@@ -64,6 +90,28 @@ document.getElementById('btn').onclick = function(){
 			}
 			pixels.push(obj);
 		}
+	}
+
+	function destroy(){
+		for(let i = 0;i<pixels.length;i++){
+			let x = Math.round(Math.random()*canvas.width);
+			let y =  Math.round(Math.random()*canvas.height);
+			pixels[i].to[0] = x;
+			pixels[i].to[1] = y;
+			pixels[i].speed[0] = (x - pixels[i].pos[0])/3;
+			pixels[i].speed[1] = (y - pixels[i].pos[1])/3;
+				
+		}
+		var time = 0;
+		up = setInterval(update,20);
+		setTimeout(function(){
+		clearInterval(up);
+		animated = false;
+		canvasTest.width = canvasTest.width;
+
+		$('#btn').trigger('click');
+		},3000);
+		
 	}
 
 	function drawPixels(){
@@ -83,14 +131,6 @@ document.getElementById('btn').onclick = function(){
 	}
 
 	function update(){
-		time += 20;
-		console.log(time);
-		animated = true;
-		if(time == 5000){
-			time = 0;
-			clearInterval(up);
-			animated = false;
-		}
 		for(let i = 0;i<pixels.length;i++){
 			pixels[i].pos[0] += pixels[i].speed[0]/50;
 			pixels[i].pos[1] += pixels[i].speed[1]/50;
