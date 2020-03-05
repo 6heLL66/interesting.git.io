@@ -17,13 +17,13 @@ document.getElementById('btn').onclick = function(){
 		return 0;
 	}
 	ctxTest.fillStyle = "#000";
-	ctxTest.font = "100pt Arial";
-	ctxTest.fillText(document.getElementById('in').value, 0, 100);
+	ctxTest.font = "80pt Arial";
+	ctxTest.fillText(document.getElementById('in').value, 0, 100,600);
 	var text = ctxTest.measureText(document.getElementById('in').value);
 	canvasTest.width = text.width;
 	ctxTest.fillStyle = "#000";
-	ctxTest.font = "100pt Arial";
-	ctxTest.fillText(document.getElementById('in').value, 0, 100);
+	ctxTest.font = "80pt Arial";
+	ctxTest.fillText(document.getElementById('in').value, 0, 100,600);
 	var wordPixels = ctxTest.getImageData(0,0,canvasTest.width,canvasTest.height);
 	var to = [];
 	var time = 0;
@@ -31,7 +31,7 @@ document.getElementById('btn').onclick = function(){
 		if(wordPixels.data[i] == 255){
 			let y = Math.round(i/4/canvasTest.width);
 			let x = (i/4)%canvasTest.width;
-			to.push([x,y]);
+			to.push([x+canvas.width/2-text.width/2,y+canvas.height/2-75]);
 		}
 	}
 	
