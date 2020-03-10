@@ -9,25 +9,27 @@
 	<script id="shader-fs" type="x-shader/x-fragment">
   		precision mediump float;
 
-  		varying vec4 vColor;
+      varying vec2 vTextureCoord;
+
+      uniform sampler2D uSampler;
 
   		void main(void) {
-    		gl_FragColor = vColor;
+        gl_FragColor  =  texture2D(uSampler, vec2(vTextureCoord.x, vTextureCoord.y));
   		}
 	</script>
 
 	<script id="shader-vs" type="x-shader/x-vertex">
   		attribute vec3 aVertexPosition;
-  		attribute vec4 aVertexColor;
-
+      attribute vec2 aTextureCoord;
+      
   		uniform mat4 uMVMatrix;
   		uniform mat4 uPMatrix;
 
-  		varying vec4 vColor;
+      varying vec2 vTextureCoord;
 
   		void main(void) {
-    		gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
-    		vColor = aVertexColor;
+        vTextureCoord = aTextureCoord;
+      	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
   		}
 	</script>
 	<script type="text/javascript" src="./js/libs/glMatrix-0.9.5.min.js"></script>
@@ -35,7 +37,7 @@
 </head>
 <body>
 	<canvas id="canvas"></canvas>
-
+  
 	<script src="./js/main.js"></script>
 </body>
 </html>
