@@ -77,8 +77,7 @@ function setMatrixUniforms() {
     gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
 }
 
-/*var triangleVertexPositionBuffer;
-var triangleVertexColorBuffer;*/
+
 
 var sphereVertexPositionBuffer;
 var sphereVertexNormalBuffer;
@@ -152,57 +151,7 @@ function initBuffers(){
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(indexArray), gl.STATIC_DRAW);
     sphereVertexIndexBuffer.itemSize = 1;
     sphereVertexIndexBuffer.numItems = indexArray.length ;
-	/*triangleVertexPositionBuffer = gl.createBuffer();
-	gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
-	var vertices = [
-         0.0,  1.0,  0.0,
-        -1.0, -1.0,  1.0,
-         1.0, -1.0,  1.0,
-         0.0,  1.0,  0.0,
-         1.0, -1.0,  1.0,
-         1.0, -1.0, -1.0,
-         0.0,  1.0,  0.0,
-         1.0, -1.0, -1.0,
-        -1.0, -1.0, -1.0,
-         0.0,  1.0,  0.0,
-        -1.0, -1.0, -1.0,
-        -1.0, -1.0,  1.0,
-        -1.0, -1.0,  1.0,
-         1.0, -1.0, -1.0,
-        -1.0, -1.0, -1.0,
-        -1.0, -1.0,  1.0,
-         1.0, -1.0, -1.0,
-         1.0, -1.0,  1.0,
-         
-    ];
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-    triangleVertexPositionBuffer.itemSize = 3;
-    triangleVertexPositionBuffer.numItems = 18;
-    triangleVertexColorBuffer = gl.createBuffer();
-	gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexColorBuffer);
-	var colors = [
-        1.0, 0.0, 0.0, 1.0,
-        0.0, 1.0, 0.0, 1.0,
-        0.0, 0.0, 1.0, 1.0,
-        1.0, 0.0, 0.0, 1.0,
-        0.0, 1.0, 0.0, 1.0,
-        0.0, 0.0, 1.0, 1.0,
-        1.0, 0.0, 0.0, 1.0,
-        0.0, 1.0, 0.0, 1.0,
-        0.0, 0.0, 1.0, 1.0,
-        1.0, 0.0, 0.0, 1.0,
-        0.0, 1.0, 0.0, 1.0,
-        0.0, 0.0, 1.0, 1.0,
-        1.0, 0.0, 0.0, 1.0,
-        0.0, 1.0, 0.0, 1.0,
-        0.0, 0.0, 1.0, 1.0,
-        1.0, 0.0, 0.0, 1.0,
-        0.0, 1.0, 0.0, 1.0,
-        0.0, 0.0, 1.0, 1.0
-    ];
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
-    triangleVertexColorBuffer.itemSize = 4;
-    triangleVertexColorBuffer.numItems = 18;*/
+	
 }
 var c = Math.PI;
 function drawScene(){
@@ -213,10 +162,7 @@ function drawScene(){
 	mat4.identity(mvMatrix);
 	mat4.translate(mvMatrix, [0, 0.0, -15.0]);
 	mat4.rotate(mvMatrix,c,[1,1,1]);
-	/*gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
-    gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, triangleVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
-    gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexColorBuffer);
-    gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, triangleVertexColorBuffer.itemSize, gl.FLOAT, false, 0, 0);*/
+	
 
     
 
