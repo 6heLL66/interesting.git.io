@@ -64,16 +64,19 @@ function initShaders(){
     gl.enableVertexAttribArray(shaderProgram.textureCoordAttribute);
 	shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
 	shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
+	shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "viewMatrix");
     shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
 	
 }
 
 var mvMatrix = mat4.create();
 var pMatrix = mat4.create();
+var viewMatrix = mat4.create();
 
 function setMatrixUniforms() {
     gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
     gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
+	gl.uniformMatrix4fv(shaderProgram.viewMatrixUniform, false , viewMatrix);
 }
 
 
@@ -85,7 +88,7 @@ var sphereVertexIndexBuffer;
 function initBuffers(){
     var latitudeBands = 60;
     var longitudeBands = 60;
-    var r = 9999;
+    var r = 10;
     var positionArray = [];
     var normalArray = [];
     var textureCoordsArray = [];
@@ -158,8 +161,9 @@ function drawScene(){
 	gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 	mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
+	mat4.lookAt(viewMatrix,(0,0,20),(0,0,-1),(0,1,0));
 	mat4.identity(mvMatrix);
-	mat4.translate(mvMatrix, [0, 0.0, -99991.0]);
+	mat4.translate(mvMatrix, [0, 0.0, -20.0]);
 	mat4.rotate(mvMatrix,c,[1,1,1]);
 	
 
