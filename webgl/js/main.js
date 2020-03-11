@@ -88,7 +88,7 @@ var sphereVertexIndexBuffer;
 function initBuffers(){
     var latitudeBands = 60;
     var longitudeBands = 60;
-    var r = 2;
+    var r = 4;
     var positionArray = [];
     var normalArray = [];
     var textureCoordsArray = [];
@@ -163,7 +163,7 @@ function drawScene(){
 	mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 500.0, pMatrix);
 	mat4.lookAt(viewMatrix,[0,0,20],[0,0,-1],[0,1,0]);
 	mat4.identity(mvMatrix);
-	mat4.translate(mvMatrix, [0, 0.0, -100.0]);
+	mat4.translate(mvMatrix, [0, 0.0, -25.0]);
 	mat4.rotate(mvMatrix,c,[1,1,1]);
 	
 
