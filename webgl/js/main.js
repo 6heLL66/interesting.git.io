@@ -88,7 +88,7 @@ var sphereVertexIndexBuffer;
 function initBuffers(){
     var latitudeBands = 60;
     var longitudeBands = 60;
-    var r = 10;
+    var r = 2;
     var positionArray = [];
     var normalArray = [];
     var textureCoordsArray = [];
