@@ -160,10 +160,10 @@ function drawScene(){
 	c += Math.PI / 300;
 	gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-	mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
+	mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 500.0, pMatrix);
 	mat4.lookAt(viewMatrix,[0,0,20],[0,0,-1],[0,1,0]);
 	mat4.identity(mvMatrix);
-	mat4.translate(mvMatrix, [0, 0.0, -20.0]);
+	mat4.translate(mvMatrix, [0, 0.0, -100.0]);
 	mat4.rotate(mvMatrix,c,[1,1,1]);
 	
 
