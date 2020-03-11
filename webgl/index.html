@@ -26,12 +26,13 @@
   		uniform mat4 uMVMatrix;
   		uniform mat4 uPMatrix;
 		
+		uniform mat4 viewMatrix;
 
       varying vec2 vTextureCoord;
 
   		void main(void) {
         vTextureCoord = aTextureCoord;
-      	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+      	gl_Position = viewMatrix * uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
   		}
 	</script>
 	<script type="text/javascript" src="./js/libs/glMatrix-0.9.5.min.js"></script>
