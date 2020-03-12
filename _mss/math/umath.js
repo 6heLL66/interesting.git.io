@@ -1,0 +1,1 @@
+const DoublePI = 2 * Math.PI;
