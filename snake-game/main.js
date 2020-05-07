@@ -14,6 +14,10 @@ var appleSize = 10;
 var rectangles = [];
 var apples = [];
 
+var key = true;
+var countApples = 0;
+var timeNow = "0:00";
+
 
 
 for(let i = 0;i < 10;i++){
@@ -38,6 +42,18 @@ function drawRect(){
 	ctx.font = "italic 250pt Arial";
 	ctx.fillText("WASD",canvas.width/2 - ctx.measureText('WASD').width/2,canvas.height/1.7);
 	for(let i = 0;i < rectangles.length;i++){
+
+		if(i == rectangles.length - 1){
+			for(let j = 0;j<rectangles.length - 1;j++){
+				if(Math.abs(rectangles[i].posx - rectangles[j].posx) < rectHeight/2 &&  Math.abs(rectangles[i].posy - rectangles[j].posy) < rectHeight/2){
+					clearInterval(gameCycle);
+					document.getElementById('window').style.display = 'flex';
+				}
+			}
+		}
+
+
+
 		if(i == rectangles.length - 1){
 			if(rectangles[i].posx == canvas.width - rectWidth/2)turnRect(rectangles[i].posx,rectangles[i].posy,'left');
 			if(rectangles[i].posx == 0)turnRect(rectangles[i].posx,rectangles[i].posy,'right');
@@ -45,12 +61,10 @@ function drawRect(){
 			if(rectangles[i].posy == canvas.height - rectHeight/2)turnRect(rectangles[i].posx,rectangles[i].posy,'top');
 		}
 
-
-
 		if(apples.length > 0){
 
 			for(let k = 0;k<apples.length;k++){
-				if(i == rectangles.length - 1 && Math.abs(rectangles[i].posx - apples[k][0]) < 10 && Math.abs(rectangles[i].posy - apples[k][1]) < 10){
+				if(i == rectangles.length - 1 && Math.abs(rectangles[i].posx - apples[k][0]) < rectHeight && Math.abs(rectangles[i].posy - apples[k][1]) < rectHeight){
 					apples.splice(k,1);
 					addPart();
 					i++;
@@ -82,7 +96,7 @@ function drawRect(){
 		ctx.fillRect(rectangles[i].posx, rectangles[i].posy, rectangles[i].width, rectangles[i].height);
 	}
 }
-setInterval(drawRect,4);
+var gameCycle = setInterval(drawRect,4);
 
 function turnRect(posx,posy,side){
 
@@ -94,12 +108,15 @@ function turnRect(posx,posy,side){
 }
 
 document.onkeydown = function(e){
+		if(key == false)return  0;
 		let posx = rectangles[rectangles.length - 1].posx;
 		let posy = rectangles[rectangles.length - 1].posy;
 		if(e.key == 'w' || e.key == 'ц')turnRect(posx,posy,'top');
 		if(e.key == 's' || e.key == 'ы')turnRect(posx,posy,'bottom');
 		if(e.key == 'a' || e.key == 'ф')turnRect(posx,posy,'left');
 		if(e.key == 'd' || e.key == 'в')turnRect(posx,posy,'right');
+		key = false;
+		setTimeout(unlockKey,15);
 }
 
 function spawnApple () {
@@ -110,6 +127,8 @@ function spawnApple () {
 }
 
 function addPart () {
+	countApples++;
+	document.getElementById('apple').innerText = String(countApples);
 	let posx;
 	let posy;
 	let stack = [];
@@ -150,3 +169,19 @@ function addPart () {
 }
 
 setInterval(spawnApple,2500,8);
+
+function unlockKey(){
+	key = true;
+}
+
+var sec = 0;
+var min = 0;
+
+function updateTime(){
+	if(sec!=60)sec++;
+	else {sec = 0;min++};
+	if(sec < 10)timeNow = String(min) + ":0" + String(sec);
+	else timeNow = String(min) + ":" + String(sec);
+	document.getElementById('time').innerText = timeNow;
+}
+setInterval(updateTime,1000);
