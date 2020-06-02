@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>MyInput</title>
+	<style>
+		body{
+			margin:0;
+			padding:0;
+		}
+	</style>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
+
+
+    <!-- Place your code in the script tag below. You can also use an external .js file -->
+    <script>
+    	const model = tf.sequential();
+		model.add(tf.layers.dense({units: 1, activation: 'linear', inputShape: [1]}));
+		model.add(tf.layers.dense({units: 1, activation: 'linear'}));
+		model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
+
+		const xs = tf.tensor([[1],[2],[3],[4],[5]]);
+		const ys = tf.tensor([[2],[4],[6],[8],[10]]);
+
+		async function train(){
+			for(let i = 0;i<300;i++){
+				await model.fit(xs, ys, {
+		  			epochs: 10
+				});
+			}
+		}
+		train().then(() => {model.predict(tf.tensor([[10]])).print()});
+     
+    </script>
+</head>
+<body id="body">
+	<script src="main.js"></script>
+</body>
+</html>
