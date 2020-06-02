@@ -61,6 +61,11 @@ function botStep(){
 	var check = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
 	if(!checkWin() && !checkLoose()){
 		while (true) {
+			if(state[5] == ""){
+				setToe(5);
+				state[5] = "o";
+				break;
+			}
 			let num = Math.round(Math.random() * 8 + 1);
 			if(state[num] != "x"){
 				state[num] = 'o';
