@@ -72,6 +72,7 @@ canvas.onclick = function(e){
 			draw();
 			current = -1;
 		}
+		else current = -1;
 	}
 	
 }
