@@ -71,8 +71,8 @@ canvas.onclick = function(e){
 			current.pos.x = x1;
 			current.pos.y = y1;		
 			draw();
-			if(current.team == "black")checkMat("white");
-			else checkMat("black");
+			//if(current.team == "black")checkMat("white");
+			//else checkMat("black");
 			current = -1;
 		}
 	}
@@ -81,8 +81,8 @@ canvas.onclick = function(e){
 			current.pos.x = x1;
 			current.pos.y = y1;
 			draw();
-			if(current.team == "black")checkMat("white");
-			else checkMat("black");
+			//if(current.team == "black")checkMat("white");
+			//else checkMat("black");
 			current = -1;
 		}
 		else current = -1;
