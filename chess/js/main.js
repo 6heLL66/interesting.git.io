@@ -37,10 +37,19 @@ function draw(){
 	}	
 }
 function findF(x,y){
+	if(x < 1 || x > 8 || y > 8 || y < 1)return false;
 	for(let i = 0;i < state.length;i++){
 		if(state[i].pos.x == x && state[i].pos.y == y)return {figure:state[i],index:i};
 	}
 	return false;
+}
+function findFName(name){
+	let arr = [];
+	for(let i = 0;i < state.length;i++){
+		if(state[i] === undefined )console.log(state);
+		if(state[i].name == name)arr.push(state[i]);
+	}
+	return arr;
 }
 canvas.onclick = function(e){
 	let x = e.clientX - canvas.getBoundingClientRect().left;
@@ -58,10 +67,12 @@ canvas.onclick = function(e){
 			current = findF(x1,y1).figure;
 		}
 		else if(current.func(x1,y1)){
-			state.splice(findF(x1,y1).index,1);
+			state.splice(state.length-1,1);
 			current.pos.x = x1;
 			current.pos.y = y1;		
 			draw();
+			if(current.team == "black")checkMat("white");
+			else checkMat("black");
 			current = -1;
 		}
 	}
@@ -70,6 +81,8 @@ canvas.onclick = function(e){
 			current.pos.x = x1;
 			current.pos.y = y1;
 			draw();
+			if(current.team == "black")checkMat("white");
+			else checkMat("black");
 			current = -1;
 		}
 		else current = -1;

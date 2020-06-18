@@ -1,8 +1,31 @@
+var buffer = [];
 var rules = {
-	"bP" : function(x,y){
-			console.log(this);
+	"bP" : function(x,y,bool){
+			let x1 = this.pos.x;
+			let y1 = this.pos.y;
+			if(findF(x,y)){
+				buffer.push(findF(x,y).figure);
+				state.splice(findF(x,y).index,1);
+			}
+			this.pos.x = x;
+			this.pos.y = y;
+			if(checkShah()){
+				if(checkShah() == this.team){
+					this.pos.x = x1;
+					this.pos.y = y1;
+					state.push(buffer[0]);
+					buffer.pop();
+					return false;
+				}
+			}
+			if(buffer.length!=0){
+				state.push(buffer[0]);
+				buffer.pop();
+			}
+			this.pos.x = x1;
+			this.pos.y = y1;
 			if(findF(x,y) && ((this.pos.x + 1 == x && this.pos.y - 1 == y) || (this.pos.x - 1 == x && this.pos.y - 1 == y))){
-				if(y == 1)choose(this);
+				if(y == 1 && !bool)choose(this);
 				this.steps++;
 				return true;
 			}
@@ -24,9 +47,32 @@ var rules = {
 			}
 			return false;
 	},
-	"wP" : function(x,y){
+	"wP" : function(x,y,bool){
+			let x1 = this.pos.x;
+			let y1 = this.pos.y;
+			if(findF(x,y)){
+				buffer.push(findF(x,y).figure);
+				state.splice(findF(x,y).index,1);
+			}
+			this.pos.x = x;
+			this.pos.y = y;
+			if(checkShah()){
+				if(checkShah() == this.team){
+					this.pos.x = x1;
+					this.pos.y = y1;
+					state.push(buffer[0]);
+					buffer.pop();
+					return false;
+				}
+			}
+			if(buffer.length!=0){
+				state.push(buffer[0]);
+				buffer.pop();
+			}
+			this.pos.x = x1;
+			this.pos.y = y1;
 			if(findF(x,y) && ((this.pos.x + 1 == x && this.pos.y + 1 == y) || (this.pos.x - 1 == x && this.pos.y + 1 == y))){
-				if(y == 8)choose(this);
+				if(y == 8 && !bool)choose(this);
 				this.steps++;
 				return true;
 			}
@@ -49,6 +95,29 @@ var rules = {
 			return false;
 	},
 	"rook" : function (x,y){
+				let x1 = this.pos.x;
+				let y1 = this.pos.y;
+				if(findF(x,y)){
+					buffer.push(findF(x,y).figure);
+					state.splice(findF(x,y).index,1);
+				}
+				this.pos.x = x;
+				this.pos.y = y;
+				if(checkShah()){
+					if(checkShah() == this.team){
+						this.pos.x = x1;
+						this.pos.y = y1;
+						state.push(buffer[0]);
+						buffer.pop();
+						return false;
+					}
+				}
+				if(buffer.length!=0){
+					state.push(buffer[0]);
+					buffer.pop();
+				}
+				this.pos.x = x1;
+				this.pos.y = y1;
 				if(x != this.pos.x && y == this.pos.y){
 					if(this.pos.x < x){
 						for(let i = this.pos.x + 1;i < x;i++){
@@ -78,10 +147,56 @@ var rules = {
 				return true;
 	},
 	"knight" : function (x,y) {
+				let x1 = this.pos.x;
+				let y1 = this.pos.y;
+				if(findF(x,y)){
+					buffer.push(findF(x,y).figure);
+					state.splice(findF(x,y).index,1);
+				}
+				this.pos.x = x;
+				this.pos.y = y;
+				if(checkShah()){
+					if(checkShah() == this.team){
+						this.pos.x = x1;
+						this.pos.y = y1;
+						state.push(buffer[0]);
+						buffer.pop();
+						return false;
+					}
+				}
+				if(buffer.length!=0){
+					state.push(buffer[0]);
+					buffer.pop();
+				}
+				this.pos.x = x1;
+				this.pos.y = y1;
 				if((Math.abs(this.pos.x - x) == 1 && Math.abs(this.pos.y - y) == 2) || (Math.abs(this.pos.x - x) == 2 && Math.abs(this.pos.y - y) == 1))return true;
 				else return false;
 	},
 	"bishop" : function (x,y){
+				let x1 = this.pos.x;
+				let y1 = this.pos.y;
+				if(findF(x,y)){
+					buffer.push(findF(x,y).figure);
+					state.splice(findF(x,y).index,1);
+				}
+				this.pos.x = x;
+				this.pos.y = y;
+				if(checkShah()){
+					if(checkShah() == this.team){
+						this.pos.x = x1;
+						this.pos.y = y1;
+						state.push(buffer[0]);
+						buffer.pop();
+						return false;
+					}
+				}
+				if(buffer.length!=0){
+					state.push(buffer[0]);
+					buffer.pop();
+				}
+				this.pos.x = x1;
+				this.pos.y = y1;
 				if(Math.abs(this.pos.x - x) == Math.abs(this.pos.y - y)){
 					let x1 = this.pos.x;
 					let y1 = this.pos.y;
@@ -122,12 +237,35 @@ var rules = {
 				else return false;
 	},
 	"king" : function(x,y){
+				let x1 = this.pos.x;
+				let y1 = this.pos.y;
+				if(findF(x,y)){
+					buffer.push(findF(x,y).figure);
+					state.splice(findF(x,y).index,1);
+				}
+				this.pos.x = x;
+				this.pos.y = y;
+				if(checkShah()){
+					if(checkShah() == this.team){
+						this.pos.x = x1;
+						this.pos.y = y1;
+						state.push(buffer[0]);
+						buffer.pop();
+						return false;
+					}
+				}
+				if(buffer.length!=0){
+					state.push(buffer[0]);
+					buffer.pop();
+				}
+				this.pos.x = x1;
+				this.pos.y = y1;
 				if((Math.abs(x - this.pos.x) > 1 || Math.abs(y - this.pos.y) > 1) && this.steps != 0)return false;
 				else if (Math.abs(x - this.pos.x) == 1 || Math.abs(y - this.pos.y) == 1) {
 					this.steps++;
 					return true;
 				}
-				else if (this.steps == 0){
+				else if (this.steps == 0 && !checkShah()){
 					if(x == this.pos.x - 2 && findF(1,this.pos.y).figure.name == "rook" && !findF(4,this.pos.y) && !findF(2,this.pos.y)){
 						findF(1,this.pos.y).figure.pos.x = 4;
 						this.steps++;
@@ -143,6 +281,29 @@ var rules = {
 				return false;
 	},
 	"queen" : function (x,y) {
+				let x1 = this.pos.x;
+				let y1 = this.pos.y;
+				if(findF(x,y)){
+					buffer.push(findF(x,y).figure);
+					state.splice(findF(x,y).index,1);
+				}
+				this.pos.x = x;
+				this.pos.y = y;
+				if(checkShah()){
+					if(checkShah() == this.team){
+						this.pos.x = x1;
+						this.pos.y = y1;
+						state.push(buffer[0]);
+						buffer.pop();
+						return false;
+					}
+				}
+				if(buffer.length!=0){
+					state.push(buffer[0]);
+					buffer.pop();
+				}
+				this.pos.x = x1;
+				this.pos.y = y1;
 				if(x != this.pos.x && y == this.pos.y){
 					if(this.pos.x < x){
 						for(let i = this.pos.x + 1;i < x;i++){
@@ -589,6 +750,158 @@ function findImg(src){
 	return false;
 }
 
-
-
+function checkShah(){
+	let kings = findFName("king");
+	let knightSteps = [[1,2],[2,1],[-1,2],[2,-1],[1,-2],[-2,1],[-1,-2],[-2,-1]];
+	for(let h = 0;h < kings.length;h++){
+		let king = kings[h];
+		if(findF(king.pos.x + 1, king.pos.y + 1)){
+			if(findF(king.pos.x + 1, king.pos.y + 1).figure.name == "pawn" && findF(king.pos.x + 1, king.pos.y + 1).figure.team != king.team && findF(king.pos.x + 1, king.pos.y + 1).figure.func(king.pos.x,king.pos.y,1)){
+				return king.team;
+			}
+		}
+		if (findF(king.pos.x - 1, king.pos.y - 1)){
+			if(findF(king.pos.x - 1, king.pos.y - 1).figure.name == "pawn" && findF(king.pos.x - 1, king.pos.y - 1).figure.team != king.team && findF(king.pos.x - 1, king.pos.y - 1).figure.func(king.pos.x,king.pos.y,1)){
+				return king.team;
+			}
+		}
+		if (findF(king.pos.x - 1, king.pos.y + 1)){
+			if(findF(king.pos.x - 1, king.pos.y + 1).figure.name == "pawn" && findF(king.pos.x - 1, king.pos.y + 1).figure.team != king.team && findF(king.pos.x - 1, king.pos.y + 1).figure.func(king.pos.x,king.pos.y,1)){
+				return king.team;
+			}
+		}
+		if (findF(king.pos.x + 1, king.pos.y - 1)){
+			if(findF(king.pos.x + 1, king.pos.y - 1).figure.name == "pawn" && findF(king.pos.x + 1, king.pos.y - 1).figure.team != king.team && findF(king.pos.x + 1, king.pos.y - 1).figure.func(king.pos.x,king.pos.y,1)){
+				return king.team;
+			}
+		}
+		for(let i = king.pos.y + 1;i <= 8;i++){
+			if(findF(king.pos.x,i)){
+				if(findF(king.pos.x,i).figure.team != king.team && (findF(king.pos.x,i).figure.name == "queen" || findF(king.pos.x,i).figure.name == "rook")){
+					return king.team;
+				}
+				else if (findF(king.pos.x,i).figure.team == king.team) break;
+			}
+		}
+		for(let i = king.pos.y - 1;i >= 1;i--){
+			if(findF(king.pos.x,i)){
+				if(findF(king.pos.x,i).figure.team != king.team && (findF(king.pos.x,i).figure.name == "queen" || findF(king.pos.x,i).figure.name == "rook")){
+					return king.team;
+				}
+				else if (findF(king.pos.x,i).figure.team == king.team) break;
+			}
+		}
+		for(let i = king.pos.x - 1;i >= 1;i--){
+			if(findF(i,king.pos.y)){
+				if(findF(i,king.pos.y).figure.team != king.team && (findF(i,king.pos.y).figure.name == "queen" || findF(i,king.pos.y).figure.name == "rook")){
+					return king.team;
+				}
+				else if (findF(i,king.pos.y).figure.team == king.team) break;
+			}
+		}
+		for(let i = king.pos.x + 1;i <= 8;i++){
+			if(findF(i,king.pos.y)){
+				if(findF(i,king.pos.y).figure.team != king.team && (findF(i,king.pos.y).figure.name == "queen" || findF(i,king.pos.y).figure.name == "rook")){
+					return king.team;
+				}
+				else if (findF(i,king.pos.y).figure.team == king.team) break;
+			}
+		}
+		for(let i = 1;true;i++){
+			if(king.pos.x + i > 8 || king.pos.y + i > 8)break;
+			if(findF(king.pos.x + i,king.pos.y + i)){
+				if(findF(king.pos.x + i,king.pos.y + i).figure.team != king.team && (findF(king.pos.x + i,king.pos.y + i).figure.name == "queen" || findF(king.pos.x + i,king.pos.y + i).figure.name == "bishop")){
+					return king.team;
+				}
+				else if (findF(king.pos.x + i,king.pos.y + i).figure.team == king.team) break;
+			}
+		}
+		for(let i = 1;true;i++){
+			if(king.pos.x - i < 1 || king.pos.y - i < 1)break;
+			if(findF(king.pos.x - i,king.pos.y - i)){
+				if(findF(king.pos.x - i,king.pos.y - i).figure.team != king.team && (findF(king.pos.x - i,king.pos.y - i).figure.name == "queen" || findF(king.pos.x - i,king.pos.y - i).figure.name == "bishop")){
+					return king.team;
+				}
+				else if (findF(king.pos.x - i,king.pos.y - i).figure.team == king.team) break;
+			}
+		}
+		for(let i = 1;true;i++){
+			if(king.pos.x + i > 8 || king.pos.y - i < 1)break;
+			if(findF(king.pos.x + i,king.pos.y - i)){
+				if(findF(king.pos.x + i,king.pos.y - i).figure.team != king.team && (findF(king.pos.x + i,king.pos.y - i).figure.name == "queen" || findF(king.pos.x + i,king.pos.y - i).figure.name == "bishop")){
+					return king.team;
+				}
+				else if (findF(king.pos.x + i,king.pos.y - i).figure.team == king.team) break;
+			}
+		}
+		for(let i = 1;true;i++){
+			if(king.pos.x - i < 1 || king.pos.y + i > 8)break;
+			if(findF(king.pos.x - i,king.pos.y + i)){
+				if(findF(king.pos.x - i,king.pos.y + i).figure.team != king.team && (findF(king.pos.x - i,king.pos.y + i).figure.name == "queen" || findF(king.pos.x - i,king.pos.y + i).figure.name == "bishop")){
+					return king.team;
+				}
+				else if (findF(king.pos.x - i,king.pos.y + i).figure.team == king.team) break;
+			}
+		}
+		for(let i = 0;i < knightSteps.length;i++){
+			if(findF(king.pos.x + knightSteps[i][0],king.pos.x + knightSteps[i][1])){
+				if(findF(king.pos.x + knightSteps[i][0],king.pos.x + knightSteps[i][1]).figure.name == "knight" && findF(king.pos.x + knightSteps[i][0],king.pos.x + knightSteps[i][1]).figure.team != king.team){
+					return king.team;
+				}
+			}
+			else break;
+		}
+	}
+	return false;
+}
+function checkMat(team){
+	var figures = [];
+	for(let i = 0;i < state.length;i++)if(state[i].team == team)figures.push(state[i]);
+	for(let i = 0;i < figures.length;i++){
+		if(figures[i].name == "pawn"){
+			if(figures[i].func(figures[i].pos.x + 1,figures[i].pos.y + 1) || figures[i].func(figures[i].pos.x - 1,figures[i].pos.y + 1) || figures[i].func(figures[i].pos.x + 1,figures[i].pos.y - 1) || figures[i].func(figures[i].pos.x - 1,figures[i].pos.y - 1)){
+				return false;
+			}
+		}
+		if(figures[i].name == "rook"){
+			for(let i = 0;i <= 8;i++){
+				if(figures[i].func(figures[i].pos.x + i,figures[i].pos.y) || figures[i].func(figures[i].pos.x - i,figures[i].pos.y) || figures[i].func(figures[i].pos.x,figures[i].pos.y + i) || figures[i].func(figures[i].pos.x ,figures[i].pos.y - i)){
+					return false;
+				}
+			}
+		}
+		if(figures[i].name == "bishop"){
+			for(let i = 0;i <= 8;i++){
+				if(figures[i].func(figures[i].pos.x + i,figures[i].pos.y + i) || figures[i].func(figures[i].pos.x - i,figures[i].pos.y - i) || figures[i].func(figures[i].pos.x - i,figures[i].pos.y + i) || figures[i].func(figures[i].pos.x - i,figures[i].pos.y + i)){
+					return false;
+				}
+			}
+		}
+		if(figures[i].name == "knight"){
+			let knightSteps = [[1,2],[2,1],[-1,2],[2,-1],[1,-2],[-2,1],[-1,-2],[-2,-1]];
+			for(let i = 0;i < knightSteps.length;i++){
+				if(figures[i].func(figures[i].pos.x + knightSteps[i][0],figures[i].pos.y + knightSteps[i][0])){
+					return false;
+				}
+			}
+		}
+		if(figures[i].name == "queen"){
+			for(let i = 0;i <= 8;i++){
+				if(figures[i].func(figures[i].pos.x + i,figures[i].pos.y) || figures[i].func(figures[i].pos.x - i,figures[i].pos.y) || figures[i].func(figures[i].pos.x,figures[i].pos.y + i) || figures[i].func(figures[i].pos.x ,figures[i].pos.y - i)){
+					return false;
+				}
+			}
+			for(let i = 0;i <= 8;i++){
+				if(figures[i].func(figures[i].pos.x + i,figures[i].pos.y + i) || figures[i].func(figures[i].pos.x - i,figures[i].pos.y - i) || figures[i].func(figures[i].pos.x - i,figures[i].pos.y + i) || figures[i].func(figures[i].pos.x - i,figures[i].pos.y + i)){
+					return false;
+				}
+			}
+		}
+	}
+	let text = team + " WINS";
+	let span = document.createElement("span");
+	span.style.cssText =  "position:fixed;top:0;left : 50%;color:green;font-size:22px;";
+	span.innerText = text;
+	document.body.append(span);
+}
 
