@@ -46,7 +46,6 @@ function findF(x,y){
 function findFName(name){
 	let arr = [];
 	for(let i = 0;i < state.length;i++){
-		if(state[i] === undefined )console.log(state);
 		if(state[i].name == name)arr.push(state[i]);
 	}
 	return arr;
@@ -67,25 +66,58 @@ canvas.onclick = function(e){
 			current = findF(x1,y1).figure;
 		}
 		else if(current.func(x1,y1)){
-			state.splice(state.length-1,1);
-			current.pos.x = x1;
-			current.pos.y = y1;		
-			draw();
-			//if(current.team == "black")checkMat("white");
-			//else checkMat("black");
-			current = -1;
+			stepK(x1,y1);	
 		}
 	}
 	else if (current != -1 && !findF(x1,y1)){
-		if(current.func(x1,y1)){
-			current.pos.x = x1;
-			current.pos.y = y1;
-			draw();
-			//if(current.team == "black")checkMat("white");
-			//else checkMat("black");
-			current = -1;
+		if(current.name == "king"){
+			if(current.func(x1,y1,checkShah(current.team))){
+				step(x1,y1);
+			}	
+		}
+		else if(current.func(x1,y1)){
+			step(x1,y1);
 		}
 		else current = -1;
 	}
 	
+}
+fillState();
+function stepK(x1,y1){
+	change(current,{x : x1, y : y1},{x : x1, y : y1});
+	if(checkShah(current.team)){
+		state.push(buffer[1]);
+		change(current,buffer[0]);
+		buffer = [];
+		current = -1;
+	}
+	else {
+		buffer = [];
+		if(current.name == "pawn" && (y1 == 8 || y1 == 1))choose(current,y1);
+		if(current.name == "pawn" || current.name == "king")current.steps++;
+		current.pos.x = x1;
+		current.pos.y = y1;	
+		draw();
+		if(current.team == "black")checkMat("white");
+		else checkMat("black");
+		current = -1;
+}		
+}
+function step(x1,y1){
+	change(current,{x : x1, y : y1});
+	if(checkShah(current.team)){
+		change(current,buffer.pop());
+		current = -1;
+	}
+	else {
+		change(current,buffer.pop());
+		if(current.name == "pawn" && (y1 == 8 || y1 == 1))choose(current,y1);
+		if(current.name == "pawn" || current.name == "king")current.steps++;
+		current.pos.x = x1;
+		current.pos.y = y1;
+		draw();
+		if(current.team == "black")checkMat("white");
+		else checkMat("black");
+		current = -1;
+	}
 }
