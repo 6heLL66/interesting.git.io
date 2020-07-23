@@ -15,7 +15,7 @@ img.onload = () => {
 }
 let settingsSmoke = {
 	rate: 1,
-	color: { r: 0.6, g: 0.6, b: 0.6, a: 0.03 },
+	color: { r: 0.7, g: 0.7, b: 0.7, a: 0.03 },
 	scaleMin: { x: 0.001, y: 0.001 },
 	scaleMax: { x: 0.01, y: 0.01 },
 	maxVel: { x: 0.00035, y: 0.0025 },
@@ -194,7 +194,7 @@ let c = 0
 function draw(color) {
 	gl.viewport(0, 0, canvas.width, canvas.height)
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
-	gl.clearColor(0, 0, .3, 1)
+	gl.clearColor(0, 0, 0, 1)
 	gl.blendFunc(gl.SRC_ALPHA, gl.ONE)
 	gl.enable(gl.BLEND)
 
